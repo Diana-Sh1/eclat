@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+@@include('html/head.html', {
+"title":"Eclat de Vie"
+})
+<body>
+<div class="wrapper">
+    @@include('html/header_gallery.html',{})
+    <main>
+        <div class="content">
+            <div class="content__container _container">
+                <div class="label_block">
+                    <div class="title__label">
+                        <h2>clean beauty <span>that performs</span></h2>
+                    </div>
+                    <div class="image__label">
+                        <img src="img/labels_cosmetics.jpg" alt="performs">
+                    </div>
+                </div>
+                <div class="main__title titleh2">
+                    <h2>Products overview</h2>
+                </div>
+                <section class="group_modules">
+                        <div class="item item_card open-left">
+                            <div class="item_text">
+                                <h3>Eclat de Vie has a strict quality assurance system that guarantees production control and product distribution support, conforming to the specification of legal and regulatory requirements.</h3>
+
+                            </div>
+                            <div class="item_button">
+                                <a href="">Сhoose your ideal treatment</a>
+                            </div>
+                        </div>
+                        <div class="item item_image img1 open-right">
+                             <img src="img/overwier_1.jpg" alt="">
+                        </div>
+                        <div class="item item_image img2 open-left">
+                            <img src="img/overwier_2.jpg" alt="">
+                        </div>
+                        <div class="item item_card cd2 open-right">
+                            <div class="item item_text">
+                            <h3>Our products contain a large amount of active ingredients, due to which the consumption of cosmeceuticals is significantly reduced, and the number of procedures is increased.</h3>
+                        </div>
+                            <div class="item_button">
+                                <a href="">Learn more</a>
+                            </div>
+                        </div>
+                        <div class="item item_card cd3 open-left">
+                            <div class="item item_text">
+                                <h3>Skin care is not superficial, because it is health care. When you have beautiful skin, it is a sign that you have a healthy mind and body.</h3>
+                            </div>
+                            <div class="item_button">
+                                <a href="">Find out more</a>
+                            </div>
+                        </div>
+                        <div class="item item_image img3 open-right">
+                            <img src="img/overwier_3.jpg" alt="">
+                        </div>
+                </section>
+    @@include('html/product_carousel.html',{})
+                <section class="video_youtube">
+                    <div class="video_body">
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="global-overlay"></div>
+    </main>
+    @@include('html/footer.html',{})
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="js/app.min.js"></script>
+
+</body>
+</html>
