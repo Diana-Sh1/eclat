@@ -378,263 +378,264 @@ close_minicart.addEventListener('click', ()=> {
 
 
 //счетчик
-let counter;
+// let counter;
+//
+// // отслеживаем кнопки плюс минус в карточке продукта
+// window.addEventListener('click', (event)=> {
+//     if (event.target.dataset.action === 'plus' || event.target.dataset.action === 'minus') {
+//
+//         const counterWrapper = event.target.closest('.item__quantity-selector');
+//         counter = counterWrapper.querySelector('[data-counter]');
+//     }
+//         if (event.target.dataset.action === 'plus') {
+//             counter.innerText = ++counter.innerText;
+//         }
+//         if (event.target.dataset.action === 'minus') {
+//
+//             if (parseInt(counter.innerText) > 1) {
+//                 counter.innerText = --counter.innerText;
+//             } else if (event.target.closest('.cart-item__qty') && parseInt(counter.innerText) === 1) {
+//                 //проверяем на товар который находится в корзине
+//                 //удаляем товар из миникорзины
+//                 event.target.closest('.cart-item').remove();
+//                 //отображение статуса корзины
+//                 toggleCartStatus();
+//                 //пересчет стоимости в корзине
+//                 calcCartPrice();
+//             }
+//         }
+//
+//         //проверяем клик на + - внутри корзины
+//     if (event.target.hasAttribute('data-action') && event.target.closest('.minicart__body')) {
+//         calcCartPrice();
+//     }
+//     })
+//
+// // отслеживаем кнопку купить в карточке товара
+// const cartWrapper = document.querySelector(".minicart__body");
+//
+//     window.addEventListener('click',function (event) {
+//         const card = event.target.closest('.item__wrapper')
+//         const productInfo = {
+//             // id: card.dataset.id,
+//             id: card.querySelector('.card_id').innerText,
+//             imgSrc: card.querySelector('.prod__image').getAttribute('src'),
+//             title: card.querySelector('.item__title').innerText,
+//             price: card.querySelector('.item__price').innerText,
+//             counter: card.querySelector('[data-counter]').innerText,
+//             volume: card.querySelector('.item__volume').innerText,
+//         }
+//         //сработал ли клик по кнопке купить в карточке товара
+//         if (event.target.hasAttribute('data-cart')) {
+//         //проверяем есть ли аналогичный товар в корзине
+//             let itemInCart =  cartWrapper.querySelector(`[data-id="${productInfo.id}"]`);
+//
+//             //если товар есть в корзине
+//             if (itemInCart) {
+//                 let counterElement = itemInCart.querySelector('[data-counter]');
+//                 counterElement.innerText = parseInt(counterElement.innerText) + parseInt(productInfo.counter)
+//             }else {
+//                 //если товара нет в корзине
+//                 // вставляем кусок html с данными товара
+//                 let cartItemHTML = `
+//                        <div class="cart-item" data-id="${productInfo.id}">
+//                         <div class="cart-item__wrapper">
+//                           <div class="cart-item__image">
+//                             <a href=""><img src="${productInfo.imgSrc}" alt=""></a>
+//                           </div>
+//                           <div class="cart-item__details">
+//                             <div class="cart-item__info">
+//                               <div class="cart-item__name">${productInfo.title}</div>
+//                             </div>
+//                             <div class="cart-item__data">
+//                             <div class="cart-item__inner">
+//                                   <div class="cart-item__price">${productInfo.price}</div>
+//                                   <div class="item__volume"><span>${productInfo.volume}</span></div>
+//                              </div>
+//                 <!--             // счетчик -->
+//                               <div class="cart-item__qty item__quantity-selector">
+//                                 <span class="qty-btn minus-btn" data-action="minus">-</span>
+//                                 <span data-counter>${productInfo.counter}</span>
+//                                 <span class="qty-btn plus-btn" data-action="plus">+</span>
+//                               </div>
+//                 <!--             // счетчик -->
+//                             <div class="cart-item-remove">remove</div>
+//                             <div id="marker_del"></div>
+//                             </div>
+//                           </div>
+//                         </div>
+//                       </div>
+//      `;
+//                 //отображаем товар в миникорзине
+//                 cartWrapper.insertAdjacentHTML("beforeend", cartItemHTML);
+//             }
+//             //сбрасываем счетчик на 1
+//             card.querySelector('[data-counter]').innerText = '1';
+//
+//
+//             //отображение статуса корзины
+//             toggleCartStatus();
+//             //пересчет общей стоимости товаров в корзине
+//             calcCartPrice();
+//         }
+//     })
+//
+//
+// //плашка Корзина пуста
+// function toggleCartStatus (){
+//     const cartWrapper = document.querySelector(".minicart__body");
+//     const cartBottom = document.querySelector(".minicart__bottom");
+//     const cartEmptyBadge = document.querySelector(".alert_empty");
+//
+//     if (cartWrapper.children.length > 0) {
+//         cartEmptyBadge.classList.remove('active')
+//         cartWrapper.classList.remove('active')
+//         cartBottom.classList.add('active')
+//     }else {
+//         cartEmptyBadge.classList.add('active');
+//         cartWrapper.classList.add('active')
+//         cartBottom.classList.remove('active')
+//     }
+// }
+//
+// //подсчет итоговой стоимости товаров
+// function calcCartPrice() {
+//     const priceElements = document.querySelectorAll('.cart-item__price');
+//     const totalPriceEl = document.querySelectorAll(".col-right");
+//     let priceTotal = 0;
+//
+//     priceElements.forEach((item)=> {
+//         //находим количество товара
+//       const amountEl = item.closest('.cart-item').querySelector('[data-counter]');
+//       //добавляем стоимость товара в общую стоимость
+//       priceTotal += parseFloat(item.innerText) * parseFloat(amountEl.innerText);
+//     })
+// //отображаем стоимость всех товаров в итого
+//   totalPriceEl.forEach((e)=> {
+//       e.innerText = priceTotal;
+//   })
+//     }
+//
+//
+// //запрос данных товаров в карточку товара
 
-// отслеживаем кнопки плюс минус в карточке продукта
-window.addEventListener('click', (event)=> {
-    if (event.target.dataset.action === 'plus' || event.target.dataset.action === 'minus') {
+// const product_card = document.querySelector(".item__wrapper");
+// if (product_card)
+//     getProducts();
+//     async function getProducts() {
+//       const response = await fetch('http://192.168.1.40/products')
+//       const productsArray = await response.json();
+//         renderProducts(productsArray);
+//     }
+//     function renderProducts(productsArray) {
+//         productsArray.forEach(function (item){
+//             let productHTML = `
+//              <div class="item__info">
+//                 <div class="item__gallery-wrapper swiper">
+//                     <div class="slider__body swiper-wrapper">
+//                         <div class="item__slide swiper-slide">
+//                           <img src="${item.image[0]}" alt="" class="prod__image">
+//                         </div>
+//                         <div class="item__slide swiper-slide">
+//                             <img src="${item.image[1]}" alt="">
+//                         </div>
+//                     </div>
+//                     <div class="swiper-pagination"></div>
+//                     </div>
+//                 <div class="item__infoWrapper">
+//                     <div class="item__title">${item.name}</div>
+//                     <div class="item__label">
+//                         <p>Product code: <span class="card_id">${item.id}</span></p>
+//                         <p>Availability: <span>In stock ${item.stock}</span></p>
+//                     </div>
+//                     <div class="item__price">${item.price}</div>
+//                     <div class="item__buttons">
+//
+//                         <div class="quantity_addtoCart">
+//  <!--             // счетчик -->
+//                             <div class="item__quantity-selector">
+//                                 <span class="quantitySelector__btn" data-action="minus">-</span>
+//                                 <span class="item__current-quantity" data-counter>1</span>
+//                                 <span class="quantitySelector__btn" data-action="plus">+</span>
+//                             </div>
+// <!--             // счетчик -->
+//                             <div class="item__addtocart" >
+//                                 <button data-cart type="submit" class="addToCart__btn">Add to Cart</button>
+//                             </div>
+//                         </div>
+//                         <div class="item__wishlist">
+//                             <a href=""><span class="icon-icon-heart"></span>Add to Wishlist</a>
+//                         </div>
+//                     </div>
+//                     <div class="item__description">
+//                     ${item.description}
+// <!--                        A daily moisturiser that gently resurfaces the skin to reveal a stunningly smooth complexion whilst providing SPF 30 protection.-->
+//                     </div>
+//                     <div class="item__volume">
+//                        Vol.: <span>${item.volume}</span>
+//                     </div>
+//                 </div>
+//             </div>
+//             <div class="item__description">
+//                 <nav class="tabs__items">
+//                     <a href="#tab_01" class="tabs__item">About this product</a>
+//                     <a href="#tab_02" class="tabs__item">Ingredients</a>
+//                 </nav>
+//                 <div class="tabs__body">
+//                     <div id="tab_01" class="tabs__block">${item.description}</div>
+//                     <div id="tab_02" class="tabs__block">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex magnam mollitia nulla odit placeat veniam.</div>
+//                 </div>
+//             </div>`;
+//             product_card.insertAdjacentHTML('beforeend', productHTML);
+//
+//             //swiper
+//         const product_swiper = new Swiper ('.item__gallery-wrapper', {
+//             wrapperClass: "slider__body",
+//             slideClass: "item__slide",
+//             pagination: {
+//                 el: '.swiper-pagination',
+//                 clickable: true,
+//                 dynamicBullets: true,
+//             },
+//             effect: 'fade',
+//             fadeEffect: {
+//                 crossFade: true
+//             },
+//             loop: true,
+//             speed: 500,
+//             nested: true,
+//             observer: true,
+//             observeParents: true,
+//             observeSlideChildren: true,
+//             watchSlidesVisibility: true,
+//             watchSlidesProgress: true,
+//
+//         });
+//         //табы продуктов
+//         const allTabs = document.querySelector(".tabs__items");
+//         document.querySelectorAll(".tabs__item").forEach((item) =>
+//             item.addEventListener('click', function (e){
+//                 e.preventDefault();
+//                 const id = e.target.getAttribute('href').replace('#', '')
+//                 document.querySelectorAll(".tabs__item").forEach(
+//                     (child) => child.classList.remove('tabs__item--active'));
+//                 document.querySelectorAll(".tabs__block").forEach(
+//                     (child) => child.classList.remove('tabs__block--active'));
+//                 item.classList.add('tabs__item--active');
+//                 document.getElementById(id).classList.add('tabs__block--active')
+//
+//             }));
+//         if (allTabs)
+//             allTabs.querySelector('.tabs__item').click();
+//
+//         });
+//
+//     }
+//
 
-        const counterWrapper = event.target.closest('.item__quantity-selector');
-        counter = counterWrapper.querySelector('[data-counter]');
-    }
-        if (event.target.dataset.action === 'plus') {
-            counter.innerText = ++counter.innerText;
-        }
-        if (event.target.dataset.action === 'minus') {
-
-            if (parseInt(counter.innerText) > 1) {
-                counter.innerText = --counter.innerText;
-            } else if (event.target.closest('.cart-item__qty') && parseInt(counter.innerText) === 1) {
-                //проверяем на товар который находится в корзине
-                //удаляем товар из миникорзины
-                event.target.closest('.cart-item').remove();
-                //отображение статуса корзины
-                toggleCartStatus();
-                //пересчет стоимости в корзине
-                calcCartPrice();
-            }
-        }
-
-        //проверяем клик на + - внутри корзины
-    if (event.target.hasAttribute('data-action') && event.target.closest('.minicart__body')) {
-        calcCartPrice();
-    }
-    })
-
-// отслеживаем кнопку купить в карточке товара
-const cartWrapper = document.querySelector(".minicart__body");
-
-    window.addEventListener('click',function (event) {
-        const card = event.target.closest('.item__wrapper')
-        const productInfo = {
-            // id: card.dataset.id,
-            id: card.querySelector('.card_id').innerText,
-            imgSrc: card.querySelector('.prod__image').getAttribute('src'),
-            title: card.querySelector('.item__title').innerText,
-            price: card.querySelector('.item__price').innerText,
-            counter: card.querySelector('[data-counter]').innerText,
-            volume: card.querySelector('.item__volume').innerText,
-        }
-        //сработал ли клик по кнопке купить в карточке товара
-        if (event.target.hasAttribute('data-cart')) {
-        //проверяем есть ли аналогичный товар в корзине
-            let itemInCart =  cartWrapper.querySelector(`[data-id="${productInfo.id}"]`);
-
-            //если товар есть в корзине
-            if (itemInCart) {
-                let counterElement = itemInCart.querySelector('[data-counter]');
-                counterElement.innerText = parseInt(counterElement.innerText) + parseInt(productInfo.counter)
-            }else {
-                //если товара нет в корзине
-                // вставляем кусок html с данными товара
-                let cartItemHTML = `
-                       <div class="cart-item" data-id="${productInfo.id}">
-                        <div class="cart-item__wrapper">
-                          <div class="cart-item__image">
-                            <a href=""><img src="${productInfo.imgSrc}" alt=""></a>
-                          </div>
-                          <div class="cart-item__details">
-                            <div class="cart-item__info">
-                              <div class="cart-item__name">${productInfo.title}</div>
-                            </div>
-                            <div class="cart-item__data">
-                            <div class="cart-item__inner">
-                                  <div class="cart-item__price">${productInfo.price}</div>
-                                  <div class="item__volume"><span>${productInfo.volume}</span></div>
-                             </div>
-                <!--             // счетчик -->
-                              <div class="cart-item__qty item__quantity-selector">
-                                <span class="qty-btn minus-btn" data-action="minus">-</span>
-                                <span data-counter>${productInfo.counter}</span>
-                                <span class="qty-btn plus-btn" data-action="plus">+</span>
-                              </div>
-                <!--             // счетчик -->
-                            <div class="cart-item-remove">remove</div>
-                            <div id="marker_del"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-     `;
-                //отображаем товар в миникорзине
-                cartWrapper.insertAdjacentHTML("beforeend", cartItemHTML);
-            }
-            //сбрасываем счетчик на 1
-            card.querySelector('[data-counter]').innerText = '1';
-
-
-            //отображение статуса корзины
-            toggleCartStatus();
-            //пересчет общей стоимости товаров в корзине
-            calcCartPrice();
-        }
-    })
-
-
-//плашка Корзина пуста
-function toggleCartStatus (){
-    const cartWrapper = document.querySelector(".minicart__body");
-    const cartBottom = document.querySelector(".minicart__bottom");
-    const cartEmptyBadge = document.querySelector(".alert_empty");
-
-    if (cartWrapper.children.length > 0) {
-        cartEmptyBadge.classList.remove('active')
-        cartWrapper.classList.remove('active')
-        cartBottom.classList.add('active')
-    }else {
-        cartEmptyBadge.classList.add('active');
-        cartWrapper.classList.add('active')
-        cartBottom.classList.remove('active')
-    }
-}
-
-//подсчет итоговой стоимости товаров
-function calcCartPrice() {
-    const priceElements = document.querySelectorAll('.cart-item__price');
-    const totalPriceEl = document.querySelectorAll(".col-right");
-    let priceTotal = 0;
-
-    priceElements.forEach((item)=> {
-        //находим количество товара
-      const amountEl = item.closest('.cart-item').querySelector('[data-counter]');
-      //добавляем стоимость товара в общую стоимость
-      priceTotal += parseFloat(item.innerText) * parseFloat(amountEl.innerText);
-    })
-//отображаем стоимость всех товаров в итого
-  totalPriceEl.forEach((e)=> {
-      e.innerText = priceTotal;
-  })
-    }
-
-
-//запрос данных товаров в карточку товара
 document.addEventListener("DOMContentLoaded", function(){
-    checkCart();
+    loadCart();
 });
-const product_card = document.querySelector(".item__wrapper");
-if (product_card)
-    getProducts();
-    async function getProducts() {
-      const response = await fetch('http://192.168.1.40/products')
-      const productsArray = await response.json();
-        renderProducts(productsArray);
-    }
-    function renderProducts(productsArray) {
-        productsArray.forEach(function (item){
-            let productHTML = `
-             <div class="item__info">
-                <div class="item__gallery-wrapper swiper">
-                    <div class="slider__body swiper-wrapper">
-                        <div class="item__slide swiper-slide">
-                          <img src="${item.image[0]}" alt="" class="prod__image">
-                        </div>
-                        <div class="item__slide swiper-slide">
-                            <img src="${item.image[1]}" alt="">
-                        </div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                    </div>
-                <div class="item__infoWrapper">
-                    <div class="item__title">${item.name}</div>
-                    <div class="item__label">
-                        <p>Product code: <span class="card_id">${item.id}</span></p>
-                        <p>Availability: <span>In stock ${item.stock}</span></p>
-                    </div>
-                    <div class="item__price">${item.price}</div>
-                    <div class="item__buttons">
-
-                        <div class="quantity_addtoCart">
- <!--             // счетчик -->
-                            <div class="item__quantity-selector">
-                                <span class="quantitySelector__btn" data-action="minus">-</span>
-                                <span class="item__current-quantity" data-counter>1</span>
-                                <span class="quantitySelector__btn" data-action="plus">+</span>
-                            </div>
-<!--             // счетчик -->
-                            <div class="item__addtocart" >
-                                <button data-cart type="submit" class="addToCart__btn">Add to Cart</button>
-                            </div>
-                        </div>
-                        <div class="item__wishlist">
-                            <a href=""><span class="icon-icon-heart"></span>Add to Wishlist</a>
-                        </div>
-                    </div>
-                    <div class="item__description">
-                    ${item.description}
-<!--                        A daily moisturiser that gently resurfaces the skin to reveal a stunningly smooth complexion whilst providing SPF 30 protection.-->
-                    </div>
-                    <div class="item__volume">
-                       Vol.: <span>${item.volume}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="item__description">
-                <nav class="tabs__items">
-                    <a href="#tab_01" class="tabs__item">About this product</a>
-                    <a href="#tab_02" class="tabs__item">Ingredients</a>
-                </nav>
-                <div class="tabs__body">
-                    <div id="tab_01" class="tabs__block">${item.description}</div>
-                    <div id="tab_02" class="tabs__block">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex magnam mollitia nulla odit placeat veniam.</div>
-                </div>
-            </div>`;
-            product_card.insertAdjacentHTML('beforeend', productHTML);
-
-            //swiper
-        const product_swiper = new Swiper ('.item__gallery-wrapper', {
-            wrapperClass: "slider__body",
-            slideClass: "item__slide",
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-                dynamicBullets: true,
-            },
-            effect: 'fade',
-            fadeEffect: {
-                crossFade: true
-            },
-            loop: true,
-            speed: 500,
-            nested: true,
-            observer: true,
-            observeParents: true,
-            observeSlideChildren: true,
-            watchSlidesVisibility: true,
-            watchSlidesProgress: true,
-
-        });
-        //табы продуктов
-        const allTabs = document.querySelector(".tabs__items");
-        document.querySelectorAll(".tabs__item").forEach((item) =>
-            item.addEventListener('click', function (e){
-                e.preventDefault();
-                const id = e.target.getAttribute('href').replace('#', '')
-                document.querySelectorAll(".tabs__item").forEach(
-                    (child) => child.classList.remove('tabs__item--active'));
-                document.querySelectorAll(".tabs__block").forEach(
-                    (child) => child.classList.remove('tabs__block--active'));
-                item.classList.add('tabs__item--active');
-                document.getElementById(id).classList.add('tabs__block--active')
-
-            }));
-        if (allTabs)
-            allTabs.querySelector('.tabs__item').click();
-
-        });
-
-    }
-
-
 //запрос данных в список товаров в раздел
 
 let cart = {};
@@ -647,7 +648,7 @@ async function getProducts_face() {
     const productsArray = await response.json();
     renderProducts_face(productsArray);
 }
-let addtocart_face = document.querySelectorAll('.cart')
+
 function renderProducts_face(productsArray) {
     productsArray.forEach(function (item){
         let face_productHTML = `
@@ -661,11 +662,11 @@ function renderProducts_face(productsArray) {
                         <div class="description">${item.description}</div>
                         <div class="price">
                             <span class="price-old"></span>
-                            <span class="price-new">€${item.price}</span>
+                            <span class="price-new" data-price>€${item.price}</span>
                         </div>
                         <div class="button-group">
-                            <div class="cart" data-art="${item.id}">
-                                <a href="/">Add to Cart</a>
+                            <div class="cart" data-id="${item.id}">
+                                <a href="#">Add to Cart</a>
                             </div>
                         </div>
                     </div>
@@ -673,39 +674,104 @@ function renderProducts_face(productsArray) {
             </div>`;
 
         productsContainer.insertAdjacentHTML('beforeend', face_productHTML);
+        let addtocart = document.querySelectorAll('.cart')
+        addtocart.forEach(e => {
+            e.addEventListener('click', addToCart);
 
-
-       addtocart_face.forEach(e => {
-           e.addEventListener('mouseover', addToCart);
-
-       })
-        function addToCart() {
-            //добавляем товар в localStorage
-            let articul = this.getAttribute('data-art');
-            if (cart[articul] != undefined) {
-                cart[articul]++;
-            }else {
-                cart[articul] = 1
-            }
-            localStorage.setItem('cart', JSON.stringify(cart))
-            console.log(cart)
-        }
+        })
     });
-
 }
 
+function addToCart() {
+    let id = this.getAttribute('data-id');
+    if (cart[id] === undefined) {
+        cart[id] = 1;
+    }else {
+        cart[id]++;
+    }
+
+    console.log(cart)
+    showMiniCart()
+    saveCart()
+}
+function showMiniCart() {
+    const cartWrapper = document.querySelector(".minicart__body");
+    for (let key in cart) {
+
+        let cartItemHTML = `
+                       <div class="cart-item" data-id="${key}">
+                        <div class="cart-item__wrapper">
+                          <div class="cart-item__image">
+
+                          </div>
+                          <div class="cart-item__details">
+                            <div class="cart-item__info">
+
+                            </div>
+                            <div class="cart-item__data">
+                            <div class="cart-item__inner">
+
+                             </div>
+                <!--             // счетчик -->
+                              <div class="cart-item__qty item__quantity-selector">
+
+                                <span data-counter>${cart[key]}</span>
+
+                              </div>
+                <!--             // счетчик -->
+                            <div class="cart-item-remove">remove</div>
+                            <div id="marker_del"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+     `;
+        //отображаем товар в миникорзине
+        cartWrapper.insertAdjacentHTML("beforeend", cartItemHTML);
+
+    }
+
+}
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart))
+}
 //проверяем наличие корзины в localStorage
-function checkCart() {
+function loadCart() {
     if (localStorage.getItem('cart') != null) {
         cart = JSON.parse(localStorage.getItem('cart'));
+        showMiniCart()
     }
 
 }
 
 
-//добавление товара в корзину из localStorage
 
 
-
-
+// <div className="cart-item" data-id="${key}">
+//     <div className="cart-item__wrapper">
+//         <div className="cart-item__image">
+//             <a href=""><img src="${item.image[0]}" alt=""></a>
+//         </div>
+//         <div className="cart-item__details">
+//             <div className="cart-item__info">
+//                 <div className="cart-item__name">${item.name}</div>
+//             </div>
+//             <div className="cart-item__data">
+//                 <div className="cart-item__inner">
+//                     <div className="cart-item__price">${item.price}</div>
+//                     <div className="item__volume"><span>${item.volume}</span></div>
+//                 </div>
+//                 <!--             // счетчик -->
+//                 <div className="cart-item__qty item__quantity-selector">
+//                     <span className="qty-btn minus-btn" data-action="minus">-</span>
+//                     <span data-counter>${cart[key]}</span>
+//                     <span className="qty-btn plus-btn" data-action="plus">+</span>
+//                 </div>
+//                 <!--             // счетчик -->
+//                 <div className="cart-item-remove">remove</div>
+//                 <div id="marker_del"></div>
+//             </div>
+//         </div>
+//     </div>
+// </div>
 
