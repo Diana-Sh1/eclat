@@ -1,5 +1,4 @@
 @use 'sass:math';
-//@import 'node_modules/swiper/swiper';
 
 //ICONFONT
 @font-face {
@@ -27,6 +26,9 @@
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.icon-delete-btn:before {
+  content: "\e911";
 }
 .icon-bag:before {
   content: "\e910";
@@ -211,6 +213,7 @@ body {
 }
 body._lock {
   overflow: hidden;
+
 }
 .wrapper {
   min-height: 100%;
@@ -221,7 +224,7 @@ body._lock {
 }
 main {
   flex: 1 1 auto;
-  background-color: #F9F9F9;
+  //background-color: #F9F9F9;
 }
 .header {
   height: 1000px;
@@ -389,6 +392,26 @@ main {
     right: 3.5rem;
   }
 }
+.icon-shopping-bag {
+  position: relative;
+}
+.bag_sum {
+  background-color: #f8bac1;
+  border-radius: 100%;
+  height: 15px;
+  width: 15px;
+  display: block;
+  position: absolute;
+  top: 5px;
+  right: 2px;
+  text-align: center;
+  font-size: 0.7rem;
+  line-height: 1.3em;
+  &.active {
+    display: none;
+  }
+}
+
 .lang__sub-list {
   position: absolute;
   right: 0;
@@ -1365,6 +1388,7 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
   justify-content: center;
   margin: 0 auto;
   padding-bottom: 50px;
+  text-align: center;
 }
 .product__image img{
   object-fit: contain;
@@ -1376,30 +1400,38 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
 .caption {
   text-align: center;
 }
-.name {
+.product_name {
   padding: 0px 0px 10px 0px;
-  & a {
+}
+.name {
     text-transform: uppercase;
     color: var(--black_color);
     font-size: calc(14px + 2 * ((100vw - 320px) / (1360 - 320)));
     font-weight: 400;
     //font-style: inherit;
   }
-}
+
 .description {
   padding: 0px 0px 20px 0px;
 }
 .price{
-  padding: 0px 0px 30px 0px;
+  padding: 0px 0px 25px 0px;
  & span {
   font-weight: 500;
    font-size: 1.2em;
 }
 }
-.cart a{
-  padding: 10px 40px ;
-  border: solid 1px var(--black_color);
-  text-transform: uppercase;
+.volume-qty, .volume {
+  font-size: 0.9rem;
+  font-style: italic;
+  padding-right: 5px;
+}
+.volume_qty {
+  padding-bottom: 15px;
+}
+.volume_product {
+  font-size: 0.9rem;
+  font-style: italic;
 }
 
 .carous-prev:after, .carous-next:after {
@@ -1423,11 +1455,21 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
     font-size: 1.3em;
   }
 }
-.cart a:hover {
-  background-color: var(--footer_color);
-  color: #FFF;
-  transition: all 0.3s ease-in-out;
+.cart{
+  padding: 10px 40px ;
+  border: solid 1px var(--black_color);
+  text-transform: uppercase;
+  cursor: pointer;
+  & a:hover {
+    color: #FFF;
+  }
+  &:hover {
+    background-color: var(--footer_color);
+    color: #FFF;
+    transition: all 0.3s ease-in-out;
+  }
 }
+
 
 //Video youtube
 .video_youtube {
@@ -1735,10 +1777,10 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
   top: 0;
   width: 100%;
   z-index: 1001;
-  //opacity: 0;
-  //visibility: hidden;
+  opacity: 0;
+  visibility: hidden;
   transition-property: opacity,transform,visibility;
-  //transform: translate3d(100%,0,0);
+  transform: translate3d(100%,0,0);
   transition-duration: 192ms;
   transition-timing-function: cubic-bezier(.4,0,1,1);
 
@@ -1803,31 +1845,48 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
   }
 }
 .cart-item {
-  //padding: 15px 30px 0px 30px;
   padding-top: 15px;
 }
-.cart-item-remove {
-  font-size: 0.8em;
-  cursor: pointer;
-  //font-style: italic;
+.close-item {
+  //display: block;
   text-transform: uppercase;
+  font-size: 0.7rem;
+  cursor: pointer;
   letter-spacing: 1px;
-  &:before {
-    width: calc(100% - 0.2em);
-    content: "";
-    position: absolute;
-    height: 1px;
-    left: 0;
-    bottom: -1px;
-    transform: scale(1);
-    transform-origin: left center;
-    transition: transform .2s ease-in-out;
+  position: relative;
+  display: inline;
+  &:hover:before {
+    transform: scaleX(1);
+    transition: transform 0.25s;
+    transform-origin: left;
   }
 }
+.close-item:before {
+   //display: inline-block;
+    content: "";
+    background-color: #000;
+    width: 40%;
+    height: 1px;
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    transform: scaleX(0);
+    transition: transform 0.25s;
+    transform-origin: right;
+  }
+
+
+
+.icon-delete-btn:before {
+  width: 10px;
+  color: #000;
+}
 .cart-item__wrapper {
+  position: relative;
   display: flex;
   border-bottom: 1px solid hsla(0,0%,59.2%,.5);
   padding-bottom: 18px;
+  //flex: 0 0 33%;
 }
 .cart-item__image img {
   max-width: 100%;
@@ -1836,13 +1895,16 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
   height: auto;
 }
 .cart-item__details {
-  padding: 11px 0 0 50px;
+  display: flex;
+  padding: 0px 30px 0px 20px;
+  flex-direction: column;
 }
 .cart-item__name {
   font-size: 1.1em;
   font-weight: 400;
-  padding: 0px 0px 15px 0px;
+  padding: 0px 0px 10px 0px;
   width: 100%;
+  text-transform: uppercase;
 }
 
 .cart-item__data {
@@ -1850,7 +1912,8 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
   right: 0;
   top: 0;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  line-height: 1.7em;
 }
 .cart-item__inner {
   display: flex;
@@ -1864,7 +1927,7 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
 }
 .cart-item__qty {
   height: auto;
-  align-items: start;
+  //align-items: start;
   display: flex;
   width: 60%;
   border: none;
@@ -1876,7 +1939,8 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
     display: inline-block;
     width: 100%;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 0.9em;
+    font-style: italic;
   }
 }
 
@@ -1890,8 +1954,9 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
   background-color: transparent;
 }
 .cart-item__price {
-  padding: 0px 0px 15px 0px;
+  padding: 0px 0px 10px 0px;
   font-style: italic;
+  font-size: 1.1em;
   &:before {
     content: "€";
   }
@@ -1947,7 +2012,6 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
   left: 0;
   bottom: 0;
   opacity: .5;
-  cursor: pointer;
   display: none;
   &.active {
   display: block;
@@ -1956,8 +2020,6 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
 .coupon-form {
   width: 100%;
   background-color: #f6f3ee;
-
-
 }
 .collapsible-wrapper__accordion {
   display: flex;
@@ -1997,7 +2059,6 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
   top: 5px;
 }
 .collapsible-inner {
-  //max-height: 100rem;
   transition-timing-function: cubic-bezier(.895,.03,.685,.22);
   transition-duration: .5s;
   transition-property: max-height;
@@ -2043,24 +2104,34 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
 }
 //cart empty
 .alert_empty {
-  display: none;
-  height: 100%;
   width: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   vertical-align: center;
-  & h2{
     letter-spacing: 2px;
     text-transform: uppercase;
-  }
+  visibility: hidden;
+  opacity: 0;
+  transition-property: opacity,transform,visibility;
+  transform: translate3d(0,100%,0);
+  transition-duration: 1s;
+  transition-timing-function: cubic-bezier(.4,0,1,1);
   &.active {
-    display: flex;
+
+    height: 100%;
+     visibility: visible;
+    opacity: 1;
+    transform: translateZ(0);
+    transition-duration: 1s;
+    transition-timing-function: cubic-bezier(0,0,.2,1);
   }
 }
+
 .minicart__bottom{
-  display: none;
+  display: block;
   &.active {
-    display: block;
+    display: none;
   }
 }

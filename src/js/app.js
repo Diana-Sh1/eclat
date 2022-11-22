@@ -1,7 +1,5 @@
 import * as flsFunctions from "./modules/functions.js";
-
 flsFunctions.isWebp();
-
 
 const swiperHeader = new Swiper('.header_swiper', {
 
@@ -293,7 +291,6 @@ for (let elm of elements1) {
 
     //активация видео
 let video = document.querySelector(".video_body");
-// window.addEventListener('DOMContentLoaded', function () {
 if (video)
     video.addEventListener('click', function () {
 
@@ -304,7 +301,6 @@ if (video)
         video.insertAdjacentHTML('afterbegin', `<iframe src="https://www.youtube.com/embed/FVJ_AX40ZAk?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`)
     })
 
-// })
 if (video)
     video.addEventListener('mouseover', () =>{
         if(!video.classList.contains('ready')) {
@@ -332,7 +328,7 @@ const collapse_inner = document.querySelector(".collapsible-inner");
     collapse_toggle.addEventListener('click',()=>{
        collapse_toggle.classList.toggle('active');
        if(collapse_toggle.classList.contains('active')) {
-           
+
            collapse_inner.style.maxHeight = collapse_inner.scrollHeight + 'px';
        } else {
            collapse_inner.style.maxHeight = 0;
@@ -348,14 +344,17 @@ const close_minicart = document.querySelector(".close-minicart");
 
 const toggleMenu = function () {
     minicart.classList.toggle("active");
-    // overlayG.classList.toggle('active');
+    overlayG.classList.toggle('active');
+
 }
-cart_btn.addEventListener("click", function (e) {
+cart_btn.addEventListener("click", function(e) {
+    toggleCartStatus();
     e.stopPropagation();
     toggleMenu();
+
     mobile_menu.classList.remove('open')
  if (minicart.classList.contains('active')) {
-     // document.body.classList.add("_lock");
+     document.body.classList.add("_lock");
  }
 });
 
@@ -366,412 +365,439 @@ document.addEventListener("click", function (e) {
     const menu_is_active = minicart.classList.contains("active");
 
     if (!its_menu && !its_btnMenu && menu_is_active) {
-        // document.body.classList.remove("_lock");
-        toggleMenu();
+        minicart.classList.add('active')
+        toggleCartStatus()
     }
 });
 close_minicart.addEventListener('click', ()=> {
+    AddtoIcon();
     minicart.classList.remove('active')
-    // overlayG.classList.remove('active')
-    // document.body.classList.remove("_lock");
+    overlayG.classList.remove('active')
+    document.body.classList.remove("_lock");
 })
 
 
-//счетчик
-// let counter;
-//
-// // отслеживаем кнопки плюс минус в карточке продукта
-// window.addEventListener('click', (event)=> {
-//     if (event.target.dataset.action === 'plus' || event.target.dataset.action === 'minus') {
-//
-//         const counterWrapper = event.target.closest('.item__quantity-selector');
-//         counter = counterWrapper.querySelector('[data-counter]');
-//     }
-//         if (event.target.dataset.action === 'plus') {
-//             counter.innerText = ++counter.innerText;
-//         }
-//         if (event.target.dataset.action === 'minus') {
-//
-//             if (parseInt(counter.innerText) > 1) {
-//                 counter.innerText = --counter.innerText;
-//             } else if (event.target.closest('.cart-item__qty') && parseInt(counter.innerText) === 1) {
-//                 //проверяем на товар который находится в корзине
-//                 //удаляем товар из миникорзины
-//                 event.target.closest('.cart-item').remove();
-//                 //отображение статуса корзины
-//                 toggleCartStatus();
-//                 //пересчет стоимости в корзине
-//                 calcCartPrice();
-//             }
-//         }
-//
-//         //проверяем клик на + - внутри корзины
-//     if (event.target.hasAttribute('data-action') && event.target.closest('.minicart__body')) {
-//         calcCartPrice();
-//     }
-//     })
-//
-// // отслеживаем кнопку купить в карточке товара
-// const cartWrapper = document.querySelector(".minicart__body");
-//
-//     window.addEventListener('click',function (event) {
-//         const card = event.target.closest('.item__wrapper')
-//         const productInfo = {
-//             // id: card.dataset.id,
-//             id: card.querySelector('.card_id').innerText,
-//             imgSrc: card.querySelector('.prod__image').getAttribute('src'),
-//             title: card.querySelector('.item__title').innerText,
-//             price: card.querySelector('.item__price').innerText,
-//             counter: card.querySelector('[data-counter]').innerText,
-//             volume: card.querySelector('.item__volume').innerText,
-//         }
-//         //сработал ли клик по кнопке купить в карточке товара
-//         if (event.target.hasAttribute('data-cart')) {
-//         //проверяем есть ли аналогичный товар в корзине
-//             let itemInCart =  cartWrapper.querySelector(`[data-id="${productInfo.id}"]`);
-//
-//             //если товар есть в корзине
-//             if (itemInCart) {
-//                 let counterElement = itemInCart.querySelector('[data-counter]');
-//                 counterElement.innerText = parseInt(counterElement.innerText) + parseInt(productInfo.counter)
-//             }else {
-//                 //если товара нет в корзине
-//                 // вставляем кусок html с данными товара
-//                 let cartItemHTML = `
-//                        <div class="cart-item" data-id="${productInfo.id}">
-//                         <div class="cart-item__wrapper">
-//                           <div class="cart-item__image">
-//                             <a href=""><img src="${productInfo.imgSrc}" alt=""></a>
-//                           </div>
-//                           <div class="cart-item__details">
-//                             <div class="cart-item__info">
-//                               <div class="cart-item__name">${productInfo.title}</div>
-//                             </div>
-//                             <div class="cart-item__data">
-//                             <div class="cart-item__inner">
-//                                   <div class="cart-item__price">${productInfo.price}</div>
-//                                   <div class="item__volume"><span>${productInfo.volume}</span></div>
-//                              </div>
-//                 <!--             // счетчик -->
-//                               <div class="cart-item__qty item__quantity-selector">
-//                                 <span class="qty-btn minus-btn" data-action="minus">-</span>
-//                                 <span data-counter>${productInfo.counter}</span>
-//                                 <span class="qty-btn plus-btn" data-action="plus">+</span>
-//                               </div>
-//                 <!--             // счетчик -->
-//                             <div class="cart-item-remove">remove</div>
-//                             <div id="marker_del"></div>
-//                             </div>
-//                           </div>
-//                         </div>
-//                       </div>
-//      `;
-//                 //отображаем товар в миникорзине
-//                 cartWrapper.insertAdjacentHTML("beforeend", cartItemHTML);
-//             }
-//             //сбрасываем счетчик на 1
-//             card.querySelector('[data-counter]').innerText = '1';
-//
-//
-//             //отображение статуса корзины
-//             toggleCartStatus();
-//             //пересчет общей стоимости товаров в корзине
-//             calcCartPrice();
-//         }
-//     })
-//
-//
-// //плашка Корзина пуста
-// function toggleCartStatus (){
-//     const cartWrapper = document.querySelector(".minicart__body");
-//     const cartBottom = document.querySelector(".minicart__bottom");
-//     const cartEmptyBadge = document.querySelector(".alert_empty");
-//
-//     if (cartWrapper.children.length > 0) {
-//         cartEmptyBadge.classList.remove('active')
-//         cartWrapper.classList.remove('active')
-//         cartBottom.classList.add('active')
-//     }else {
-//         cartEmptyBadge.classList.add('active');
-//         cartWrapper.classList.add('active')
-//         cartBottom.classList.remove('active')
-//     }
-// }
-//
-// //подсчет итоговой стоимости товаров
-// function calcCartPrice() {
-//     const priceElements = document.querySelectorAll('.cart-item__price');
-//     const totalPriceEl = document.querySelectorAll(".col-right");
-//     let priceTotal = 0;
-//
-//     priceElements.forEach((item)=> {
-//         //находим количество товара
-//       const amountEl = item.closest('.cart-item').querySelector('[data-counter]');
-//       //добавляем стоимость товара в общую стоимость
-//       priceTotal += parseFloat(item.innerText) * parseFloat(amountEl.innerText);
-//     })
-// //отображаем стоимость всех товаров в итого
-//   totalPriceEl.forEach((e)=> {
-//       e.innerText = priceTotal;
-//   })
-//     }
-//
-//
-// //запрос данных товаров в карточку товара
+//версия 2
+const CART = {
+    KEY: 'cart',
+    contents: [],
+    init(){
+        //проверка наличия контента в local storage
+        let _contents = localStorage.getItem(CART.KEY);
+        if(_contents){
+            CART.contents = JSON.parse(_contents);
+        }else{
+            CART.contents = [
+            ];
+            CART.sync();
+        }
+    },
+    async sync(){
+        let _cart = JSON.stringify(CART.contents);
+        await localStorage.setItem(CART.KEY, _cart);
+    },
+    find(id){
+        //find an item in the cart by it's id
+        let match = CART.contents.filter(item=>{
+            if(item.id === id)
+                return true;
+        });
+        if(match && match[0])
+            return match[0];
+    },
+    add(id){
+        //add a new item to the cart
+        //check that it is not in the cart already
+        if(CART.find(id)){
+            CART.increase(id, 1);
+        }else{
+            let arr = PRODUCTS.filter(product=>{
+                if(product.id === id){
+                    return true;
+                }
+            });
+            if(arr && arr[0]){
+                let obj = {
+                    id: arr[0].id,
+                    title: arr[0].name,
+                    qty: 1,
+                    itemPrice: arr[0].price,
+                    img: arr[0].image,
+                    volume: arr[0].volume,
+                };
+                CART.contents.push(obj);
 
-// const product_card = document.querySelector(".item__wrapper");
-// if (product_card)
-//     getProducts();
-//     async function getProducts() {
-//       const response = await fetch('http://192.168.1.40/products')
-//       const productsArray = await response.json();
-//         renderProducts(productsArray);
-//     }
-//     function renderProducts(productsArray) {
-//         productsArray.forEach(function (item){
-//             let productHTML = `
-//              <div class="item__info">
-//                 <div class="item__gallery-wrapper swiper">
-//                     <div class="slider__body swiper-wrapper">
-//                         <div class="item__slide swiper-slide">
-//                           <img src="${item.image[0]}" alt="" class="prod__image">
-//                         </div>
-//                         <div class="item__slide swiper-slide">
-//                             <img src="${item.image[1]}" alt="">
-//                         </div>
-//                     </div>
-//                     <div class="swiper-pagination"></div>
-//                     </div>
-//                 <div class="item__infoWrapper">
-//                     <div class="item__title">${item.name}</div>
-//                     <div class="item__label">
-//                         <p>Product code: <span class="card_id">${item.id}</span></p>
-//                         <p>Availability: <span>In stock ${item.stock}</span></p>
-//                     </div>
-//                     <div class="item__price">${item.price}</div>
-//                     <div class="item__buttons">
-//
-//                         <div class="quantity_addtoCart">
-//  <!--             // счетчик -->
-//                             <div class="item__quantity-selector">
-//                                 <span class="quantitySelector__btn" data-action="minus">-</span>
-//                                 <span class="item__current-quantity" data-counter>1</span>
-//                                 <span class="quantitySelector__btn" data-action="plus">+</span>
-//                             </div>
-// <!--             // счетчик -->
-//                             <div class="item__addtocart" >
-//                                 <button data-cart type="submit" class="addToCart__btn">Add to Cart</button>
-//                             </div>
-//                         </div>
-//                         <div class="item__wishlist">
-//                             <a href=""><span class="icon-icon-heart"></span>Add to Wishlist</a>
-//                         </div>
-//                     </div>
-//                     <div class="item__description">
-//                     ${item.description}
-// <!--                        A daily moisturiser that gently resurfaces the skin to reveal a stunningly smooth complexion whilst providing SPF 30 protection.-->
-//                     </div>
-//                     <div class="item__volume">
-//                        Vol.: <span>${item.volume}</span>
-//                     </div>
-//                 </div>
-//             </div>
-//             <div class="item__description">
-//                 <nav class="tabs__items">
-//                     <a href="#tab_01" class="tabs__item">About this product</a>
-//                     <a href="#tab_02" class="tabs__item">Ingredients</a>
-//                 </nav>
-//                 <div class="tabs__body">
-//                     <div id="tab_01" class="tabs__block">${item.description}</div>
-//                     <div id="tab_02" class="tabs__block">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex magnam mollitia nulla odit placeat veniam.</div>
-//                 </div>
-//             </div>`;
-//             product_card.insertAdjacentHTML('beforeend', productHTML);
-//
-//             //swiper
-//         const product_swiper = new Swiper ('.item__gallery-wrapper', {
-//             wrapperClass: "slider__body",
-//             slideClass: "item__slide",
-//             pagination: {
-//                 el: '.swiper-pagination',
-//                 clickable: true,
-//                 dynamicBullets: true,
-//             },
-//             effect: 'fade',
-//             fadeEffect: {
-//                 crossFade: true
-//             },
-//             loop: true,
-//             speed: 500,
-//             nested: true,
-//             observer: true,
-//             observeParents: true,
-//             observeSlideChildren: true,
-//             watchSlidesVisibility: true,
-//             watchSlidesProgress: true,
-//
-//         });
-//         //табы продуктов
-//         const allTabs = document.querySelector(".tabs__items");
-//         document.querySelectorAll(".tabs__item").forEach((item) =>
-//             item.addEventListener('click', function (e){
-//                 e.preventDefault();
-//                 const id = e.target.getAttribute('href').replace('#', '')
-//                 document.querySelectorAll(".tabs__item").forEach(
-//                     (child) => child.classList.remove('tabs__item--active'));
-//                 document.querySelectorAll(".tabs__block").forEach(
-//                     (child) => child.classList.remove('tabs__block--active'));
-//                 item.classList.add('tabs__item--active');
-//                 document.getElementById(id).classList.add('tabs__block--active')
-//
-//             }));
-//         if (allTabs)
-//             allTabs.querySelector('.tabs__item').click();
-//
-//         });
-//
-//     }
-//
+                //update localStorage
+                CART.sync();
+                AddtoIcon();
 
-document.addEventListener("DOMContentLoaded", function(){
-    loadCart();
+            }else{
+                //product id does not exist in products data
+                console.error('Invalid Product');
+            }
+
+        }
+
+    },
+    increase(id, qty=1){
+        //increase the quantity of an item in the cart
+        CART.contents = CART.contents.map(item=>{
+            if(item.id === id)
+                item.qty = item.qty + qty;
+            showCart()
+            return item;
+
+        });
+        //update localStorage
+        CART.sync()
+        AddtoIcon();
+    },
+    reduce(id, qty=1){
+        //reduce the quantity of an item in the cart
+        CART.contents = CART.contents.map(item=>{
+            if(item.id === id)
+                item.qty = item.qty - qty;
+            return item;
+        });
+        CART.contents.forEach(item=>{
+            if(item.id === id && item.qty === 0)
+              CART.remove(id);
+            showCart()
+            toggleCartStatus()
+        });
+        //update localStorage
+        CART.sync();
+        AddtoIcon();
+
+
+    },
+    remove(id){
+        //remove an item entirely from CART.contents based on its id
+        CART.contents = CART.contents.filter(item=>{
+            if(item.id !== id)
+                return true;
+
+        });
+        //update localStorage
+        CART.sync()
+
+    },
+    sort(field='title'){
+        //sort by field - title, price
+        //return a sorted shallow copy of the CART.contents array
+        let sorted = CART.contents.sort( (a, b)=>{
+            if(a[field] > b[field]){
+                return 1;
+            }else if(a[field] < a[field]){
+                return -1;
+            }else{
+                return 0;
+            }
+        });
+        return sorted;
+        //NO impact on localStorage
+    },
+};
+
+
+let PRODUCTS = [];
+
+document.addEventListener('DOMContentLoaded', ()=>{
+    //when the page is ready
+    getProducts( showProducts, errorMessage );
+    //get the cart items from localStorage
+    CART.init();
+    //load the cart items
+    toggleCartStatus()
+    showCart();
+    AddtoIcon();
+
 });
-//запрос данных в список товаров в раздел
 
-let cart = {};
-const productsContainer = document.querySelector(".product-grids");
-if (productsContainer)
-    getProducts_face();
+let cartSection = document.querySelector('.minicart__body');
+function showCart(){
+    cartSection.innerHTML = '';
+    let s = CART.sort('qty');
+    let totalSum = 0
+    s.forEach( item =>{
 
-async function getProducts_face() {
-    const response = await fetch('http://192.168.1.40/products')
-    const productsArray = await response.json();
-    renderProducts_face(productsArray);
+        let cartitem = document.createElement('div');
+        cartitem.className = 'cart-item';
+
+        let cartitem_wrapper = document.createElement('div')
+        cartitem_wrapper.className = 'cart-item__wrapper'
+        cartitem.appendChild(cartitem_wrapper)
+        //photo
+        let cartImage_wrapper = document.createElement('div')
+        cartImage_wrapper.className = 'cart-item__image';
+        cartitem_wrapper.appendChild(cartImage_wrapper);
+
+
+
+        let img_a = document.createElement('a');
+        cartImage_wrapper.appendChild(img_a);
+
+        let cart_image = document.createElement('img');
+        cart_image.src = item.img[0];
+        img_a.appendChild(cart_image)
+
+
+        let cart_details = document.createElement('div');
+        cart_details.className = 'cart-item__details';
+        cartitem_wrapper.appendChild(cart_details);
+
+        let title = document.createElement('div');
+        title.textContent = item.title;
+        title.className = 'cart-item__name'
+        cart_details.appendChild(title);
+
+
+        //price
+        let price_inner = document.createElement('div')
+        price_inner.className = 'cart-item__data'
+        cart_details.appendChild(price_inner)
+
+        let price = document.createElement('div');
+        price.className = 'cart-item__price';
+        let cost = parseInt(item.qty) * parseInt(item.itemPrice)
+        price.textContent = cost;
+       //итоговая стоимость товаров
+        totalSum += cost;
+
+        price_inner.appendChild(price);
+
+        //volume
+        let volume_inner = document.createElement('div')
+        volume_inner.className = 'volume-qty'
+        price_inner.appendChild(volume_inner)
+        let volume = document.createElement('span')
+        volume.className = 'volume';
+        volume.textContent = item.volume;
+        volume_inner.appendChild(volume)
+
+
+        //plus minus
+        let controls = document.createElement('div');
+        controls.className = 'cart-item__qty item__quantity-selector';
+        cart_details.appendChild(controls);
+
+        let minus = document.createElement('span');
+        minus.textContent = '-';
+        minus.className = 'qty-btn';
+        minus.setAttribute('data-id', item.id)
+        controls.appendChild(minus);
+        minus.addEventListener('click', decrementCart)
+
+        let qty = document.createElement('span');
+        qty.textContent = item.qty;
+        controls.appendChild(qty);
+
+
+        let plus = document.createElement('span');
+        plus.textContent = '+';
+        plus.setAttribute('data-id', item.id);
+        plus.className = 'qty-btn';
+        controls.appendChild(plus);
+        plus.addEventListener('click', incrementCart);
+
+        let remove_btn = document.createElement('span');
+        remove_btn.className = 'close-item';
+        remove_btn.textContent = 'remove'
+        remove_btn.setAttribute('data-id', item.id)
+        cart_details.appendChild(remove_btn)
+        remove_btn.addEventListener('click', deleteFromLS)
+
+
+        cartSection.appendChild(cartitem);
+
+    })
+
+
+    let totalPrice = document.querySelectorAll(".col-right");
+    totalPrice.forEach(e=> e.innerHTML = totalSum);
 }
 
-function renderProducts_face(productsArray) {
-    productsArray.forEach(function (item){
-        let face_productHTML = `
-            <div class="product__item" id="${item.id}">
-                <div class="product__image">
-                    <a href="product_card.html"><img src="${item.image[0]}" alt=""></a>
-                </div>
-                <div class="product-details">
-                    <div class="caption">
-                        <div class="name"><a href="product_card.html">${item.name}</a></div>
-                        <div class="description">${item.description}</div>
-                        <div class="price">
-                            <span class="price-old"></span>
-                            <span class="price-new" data-price>€${item.price}</span>
-                        </div>
-                        <div class="button-group">
-                            <div class="cart" data-id="${item.id}">
-                                <a href="#">Add to Cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
+function incrementCart(ev){
+    ev.preventDefault();
+    let id = parseInt(ev.target.getAttribute('data-id'));
+    CART.increase(id, 1);
+    let controls = ev.target.parentElement;
+    let qty = controls.querySelector('span:nth-child(2)');
+    let item = CART.find(id);
+    if(item){
+        qty.textContent = item.qty;
+    }
+}
 
-        productsContainer.insertAdjacentHTML('beforeend', face_productHTML);
-        let addtocart = document.querySelectorAll('.cart')
-        addtocart.forEach(e => {
-            e.addEventListener('click', addToCart);
+function decrementCart(ev){
+    ev.preventDefault();
+    let id = parseInt(ev.target.getAttribute('data-id'));
+    CART.reduce(id, 1);
+    let controls = ev.target.parentElement;
 
+    let qty = controls.querySelector('span:nth-child(2)');
+    let item = CART.find(id);
+    if(item){
+        qty.textContent = item.qty;
+    }
+    else{
+        console.log('item removed')
+        // document.querySelector('.minicart__body').removeChild(controls.parentElement);
+    }
+}
+
+function getProducts(success, failure){
+    //request the list of products from the "server"
+    const URL = "http://192.168.1.40/products/";
+    fetch(URL, {
+        method: 'GET',
+        mode: 'cors'
+    })
+        .then(response=>response.json())
+        .then(success)
+        .catch(failure);
+}
+
+function showProducts( products ){
+    PRODUCTS = products;
+     let productSection = document.querySelector('.product-grids');
+        productSection.innerHTML = "";
+        products.forEach(product=>{
+        let card = document.createElement('div');
+        card.className = 'product__item';
+        //add the image to the card
+        let img_inner = document.createElement('div')
+        img_inner.className = 'product__image'
+        card.appendChild(img_inner)
+        //image
+        let img = document.createElement('img');
+        img.src = product.image[0];
+        img_inner.appendChild(img);
+
+        //add the title to the card
+        let product_details = document.createElement('div')
+        product_details.className ='product-details'
+        card.appendChild(product_details)
+
+        let title_inner = document.createElement('div');
+        title_inner.className = 'product_name';
+        product_details.appendChild(title_inner);
+
+        let title = document.createElement('a')
+        title.className = 'name'
+        title.textContent = product.name;
+        title_inner.appendChild(title)
+        //volume
+        let volume_inner = document.createElement('div')
+        volume_inner.className = 'volume_qty'
+        product_details.appendChild(volume_inner)
+        let volume = document.createElement('span')
+        volume.className = 'volume_product';
+        volume.textContent = product.volume;
+        volume_inner.appendChild(volume)
+
+        //add the description to the card
+        let desc = document.createElement('div');
+        desc.className = 'description'
+        desc.textContent = product.description;
+        product_details.appendChild(desc);
+
+        //add the price
+        let price_inner = document.createElement('div');
+        price_inner.className = 'price';
+        product_details.appendChild(price_inner);
+        let price = document.createElement('span')
+        price.textContent = '€' + product.price;
+        price_inner.appendChild(price);
+
+        //add the button to the card
+        let btn_inner = document.createElement('div');
+        btn_inner.className = 'cart_inner';
+        product_details.appendChild(btn_inner)
+
+        let btn = document.createElement('a')
+        btn.className = 'cart'
+        btn.textContent = 'Add to Cart';
+        btn.setAttribute('data-id', product.id);
+        btn.addEventListener('click', addItem);
+        btn_inner.appendChild(btn);
+        //add the card to the section
+        productSection.appendChild(card);
+    })
+}
+
+function addItem(ev){
+    ev.preventDefault();
+    let id = parseInt(ev.target.getAttribute('data-id'));
+
+    CART.add(id, 1);
+
+    let btn_add = document.querySelectorAll('.cart')
+    btn_add.forEach((e)=> {
+        e.addEventListener('click',function (){ setTimeout(OpenMenu, 500)})
+    function OpenMenu() {
+            minicart.classList.add("active");
+            overlayG.classList.add('active');
+            document.body.classList.add("_lock");
+
+        };
+
+    })
+    toggleCartStatus();
+    showCart();
+
+}
+
+function errorMessage(err){
+    //display the error message to the user
+    console.error(err);
+}
+
+//плашка с суммой товаров на иконке корзины
+
+    function AddtoIcon() {
+        let bag_sum = document.querySelector(".bag_sum");
+        if(bag_sum) {
+        let sum = 0;
+        CART.contents.forEach(e => {
+            let quantity = e.qty
+            sum += quantity
+            bag_sum.innerHTML = parseInt(sum)
+            bag_sum.classList.remove('active')
         })
-    });
+        if (sum === 0) {
+            bag_sum.innerHTML = null;
+            bag_sum.classList.add('active')
+        }
+    }
 }
+//плашка Корзина пуста
+function toggleCartStatus(){
+    const cartBottom = document.querySelector(".minicart__bottom");
+    const cartEmptyBadge = document.querySelector(".alert_empty");
 
-function addToCart() {
-    let id = this.getAttribute('data-id');
-    if (cart[id] === undefined) {
-        cart[id] = 1;
+    if (CART.contents.length === 0) {
+        cartEmptyBadge.classList.add('active');
+        cartSection.classList.add('active')
+        cartBottom.classList.add('active')
     }else {
-        cart[id]++;
+        cartEmptyBadge.classList.remove('active')
+        cartSection.classList.remove('active')
+        cartBottom.classList.remove('active')
     }
-
-    console.log(cart)
-    showMiniCart()
-    saveCart()
-}
-function showMiniCart() {
-    const cartWrapper = document.querySelector(".minicart__body");
-    for (let key in cart) {
-
-        let cartItemHTML = `
-                       <div class="cart-item" data-id="${key}">
-                        <div class="cart-item__wrapper">
-                          <div class="cart-item__image">
-
-                          </div>
-                          <div class="cart-item__details">
-                            <div class="cart-item__info">
-
-                            </div>
-                            <div class="cart-item__data">
-                            <div class="cart-item__inner">
-
-                             </div>
-                <!--             // счетчик -->
-                              <div class="cart-item__qty item__quantity-selector">
-
-                                <span data-counter>${cart[key]}</span>
-
-                              </div>
-                <!--             // счетчик -->
-                            <div class="cart-item-remove">remove</div>
-                            <div id="marker_del"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-     `;
-        //отображаем товар в миникорзине
-        cartWrapper.insertAdjacentHTML("beforeend", cartItemHTML);
-
-    }
-
-}
-function saveCart() {
-    localStorage.setItem('cart', JSON.stringify(cart))
-}
-//проверяем наличие корзины в localStorage
-function loadCart() {
-    if (localStorage.getItem('cart') != null) {
-        cart = JSON.parse(localStorage.getItem('cart'));
-        showMiniCart()
-    }
-
 }
 
+//удаление товара из ЛС
+function deleteFromLS () {
+    let items = CART.contents
+    items.forEach(function (item,index){
+            items.splice(index,1);
+    });
+    CART.sync();
+    showCart();
+    AddtoIcon();
+}
 
+                                                                                                                                                                                                   
 
-
-// <div className="cart-item" data-id="${key}">
-//     <div className="cart-item__wrapper">
-//         <div className="cart-item__image">
-//             <a href=""><img src="${item.image[0]}" alt=""></a>
-//         </div>
-//         <div className="cart-item__details">
-//             <div className="cart-item__info">
-//                 <div className="cart-item__name">${item.name}</div>
-//             </div>
-//             <div className="cart-item__data">
-//                 <div className="cart-item__inner">
-//                     <div className="cart-item__price">${item.price}</div>
-//                     <div className="item__volume"><span>${item.volume}</span></div>
-//                 </div>
-//                 <!--             // счетчик -->
-//                 <div className="cart-item__qty item__quantity-selector">
-//                     <span className="qty-btn minus-btn" data-action="minus">-</span>
-//                     <span data-counter>${cart[key]}</span>
-//                     <span className="qty-btn plus-btn" data-action="plus">+</span>
-//                 </div>
-//                 <!--             // счетчик -->
-//                 <div className="cart-item-remove">remove</div>
-//                 <div id="marker_del"></div>
-//             </div>
-//         </div>
-//     </div>
-// </div>
 
