@@ -61,10 +61,6 @@ const carousel_wrapper = new Swiper('.products__wrapper', {
 });
 
 
-
-
-
-
 let marker = document.querySelector('#marker');
 let item = document.querySelectorAll('.main-menu a')
 const logo = document.querySelector(".logo");
@@ -144,11 +140,6 @@ handle.forEach(e => {
                 }, 0);
             } else {
                 data_target.style.height = '0px';
-                // data_target.addEventListener('transitionend', function () {
-                //     // data_target.classList.remove('active');
-                // }, {
-                //     once: true
-                // });
             }
             window.onclick = e => {
                 if (e.target == data_target || e.target == document.querySelector(`[data-path=${menu}]`)){
@@ -208,7 +199,6 @@ handle_footer.forEach(q => {
     });
 
 });
-
 
 
 //marker lang//
@@ -321,7 +311,6 @@ if (video)
         })
 
 
-
 //аккордеон промокода в миникорзине
 const collapse_toggle = document.querySelector(".collapsible-toggle");
 const collapse_inner = document.querySelector(".collapsible-inner");
@@ -370,7 +359,7 @@ document.addEventListener("click", function (e) {
     }
 });
 close_minicart.addEventListener('click', ()=> {
-    AddtoIcon();
+    addtoIcon();
     minicart.classList.remove('active')
     overlayG.classList.remove('active')
     document.body.classList.remove("_lock");
@@ -429,7 +418,7 @@ const CART = {
 
                 //update localStorage
                 CART.sync();
-                AddtoIcon();
+                addtoIcon();
 
             }else{
                 //product id does not exist in products data
@@ -450,7 +439,7 @@ const CART = {
         });
         //update localStorage
         CART.sync()
-        AddtoIcon();
+        addtoIcon();
     },
     reduce(id, qty=1){
         //reduce the quantity of an item in the cart
@@ -467,7 +456,7 @@ const CART = {
         });
         //update localStorage
         CART.sync();
-        AddtoIcon();
+        addtoIcon();
 
 
     },
@@ -510,7 +499,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     //load the cart items
     toggleCartStatus()
     showCart();
-    AddtoIcon();
+    addtoIcon();
 
 });
 
@@ -612,7 +601,6 @@ function showCart(){
 
     })
 
-
     let totalPrice = document.querySelectorAll(".col-right");
     totalPrice.forEach(e=> e.innerHTML = totalSum);
 }
@@ -661,6 +649,7 @@ function getProducts(success, failure){
 function showProducts( products ){
     PRODUCTS = products;
      let productSection = document.querySelector('.product-grids');
+     if(productSection) {
         productSection.innerHTML = "";
         products.forEach(product=>{
         let card = document.createElement('div');
@@ -724,7 +713,7 @@ function showProducts( products ){
         //add the card to the section
         productSection.appendChild(card);
     })
-}
+}}
 
 function addItem(ev){
     ev.preventDefault();
@@ -755,7 +744,7 @@ function errorMessage(err){
 
 //плашка с суммой товаров на иконке корзины
 
-    function AddtoIcon() {
+    function addtoIcon() {
         let bag_sum = document.querySelector(".bag_sum");
         if(bag_sum) {
         let sum = 0;
@@ -795,7 +784,7 @@ function deleteFromLS () {
     });
     CART.sync();
     showCart();
-    AddtoIcon();
+    addtoIcon();
 }
 
                                                                                                                                                                                                    
