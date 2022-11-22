@@ -658,10 +658,15 @@ function showProducts( products ){
         let img_inner = document.createElement('div')
         img_inner.className = 'product__image'
         card.appendChild(img_inner)
+         let img_link = document.createElement('a')
+         img_link.className = 'img_link'
+         img_link.setAttribute("href", "product_card.html")
+         img_inner.appendChild(img_link)
         //image
         let img = document.createElement('img');
         img.src = product.image[0];
-        img_inner.appendChild(img);
+        img_link.appendChild(img);
+
 
         //add the title to the card
         let product_details = document.createElement('div')
@@ -787,6 +792,118 @@ function deleteFromLS () {
     addtoIcon();
 }
 
-                                                                                                                                                                                                   
+//карточка товара
+const product_card = document.querySelector(".item__wrapper");
+if (product_card)
+    getProduct();
+    async function getProduct() {
+      const response = await fetch('http://192.168.1.40/products')
+      const productsArray = await response.json();
+        renderProducts(productsArray);
+    }
+    function renderProducts(productsArray) {
+        productsArray.forEach(function (item){
+            let productHTML = `
+             <div class="item__info">
+                <div class="item__gallery-wrapper swiper">
+                    <div class="slider__body swiper-wrapper">
+                        <div class="item__slide swiper-slide">
+                          <img src="${item.image[0]}" alt="" class="prod__image">
+                        </div>
+                        <div class="item__slide swiper-slide">
+                            <img src="${item.image[1]}" alt="">
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    </div>
+                <div class="item__infoWrapper">
+                    <div class="item__title">${item.name}</div>
+                    <div class="item__label">
+                        <p>Product code: <span class="card_id">${item.id}</span></p>
+                        <p>Availability: <span>In stock ${item.stock}</span></p>
+                    </div>
+                    <div class="item__price">${item.price}</div>
+                    <div class="item__buttons">
+
+                        <div class="quantity_addtoCart">
+ <!--             // счетчик -->
+                            <div class="item__quantity-selector">
+                                <span class="quantitySelector__btn" data-action="minus">-</span>
+                                <span class="item__current-quantity" data-counter>1</span>
+                                <span class="quantitySelector__btn" data-action="plus">+</span>
+                            </div>
+<!--             // счетчик -->
+                            <div class="item__addtocart" >
+                                <button data-cart type="submit" class="addToCart__btn">Add to Cart</button>
+                            </div>
+                        </div>
+                        <div class="item__wishlist">
+                            <a href=""><span class="icon-icon-heart"></span>Add to Wishlist</a>
+                        </div>
+                    </div>
+                    <div class="item__description">
+                    ${item.description}
+<!--                        A daily moisturiser that gently resurfaces the skin to reveal a stunningly smooth complexion whilst providing SPF 30 protection.-->
+                    </div>
+                    <div class="item__volume">
+                       Vol.: <span>${item.volume}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="item__description">
+                <nav class="tabs__items">
+                    <a href="#tab_01" class="tabs__item">About this product</a>
+                    <a href="#tab_02" class="tabs__item">Ingredients</a>
+                </nav>
+                <div class="tabs__body">
+                    <div id="tab_01" class="tabs__block">${item.description}</div>
+                    <div id="tab_02" class="tabs__block">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex magnam mollitia nulla odit placeat veniam.</div>
+                </div>
+            </div>`;
+            // product_card.insertAdjacentHTML('beforeend', productHTML);
+            product_card.innerHTML = productHTML;
+            //swiper
+        const product_swiper = new Swiper ('.item__gallery-wrapper', {
+            wrapperClass: "slider__body",
+            slideClass: "item__slide",
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                dynamicBullets: true,
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
+            loop: true,
+            speed: 500,
+            nested: true,
+            observer: true,
+            observeParents: true,
+            observeSlideChildren: true,
+            watchSlidesVisibility: true,
+            watchSlidesProgress: true,
+
+        });
+        //табы продуктов
+        const allTabs = document.querySelector(".tabs__items");
+        document.querySelectorAll(".tabs__item").forEach((item) =>
+            item.addEventListener('click', function (e){
+                e.preventDefault();
+                const id = e.target.getAttribute('href').replace('#', '')
+                document.querySelectorAll(".tabs__item").forEach(
+                    (child) => child.classList.remove('tabs__item--active'));
+                document.querySelectorAll(".tabs__block").forEach(
+                    (child) => child.classList.remove('tabs__block--active'));
+                item.classList.add('tabs__item--active');
+                document.getElementById(id).classList.add('tabs__block--active')
+
+            }));
+        if (allTabs)
+            allTabs.querySelector('.tabs__item').click();
+
+        });
+
+    }
 
 
