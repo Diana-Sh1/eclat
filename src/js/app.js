@@ -636,7 +636,7 @@ function decrementCart(ev){
 
 function getProducts(success, failure){
     //request the list of products from the "server"
-    const URL = "http://192.168.1.40/products/";
+    const URL = "http://78.107.238.148/products";
     fetch(URL, {
         method: 'GET',
         mode: 'cors'
@@ -797,7 +797,7 @@ const product_card = document.querySelector(".item__wrapper");
 if (product_card)
     getProduct();
     async function getProduct() {
-      const response = await fetch('http://192.168.1.40/products')
+      const response = await fetch('http://78.107.238.148/products')
       const productsArray = await response.json();
         renderProducts(productsArray);
     }

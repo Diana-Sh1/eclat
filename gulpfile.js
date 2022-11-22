@@ -5,6 +5,28 @@ import { path } from "./gulp/config/path.js";
 //Импорт общих плагинов
 import { plugins } from "./gulp/config/plugins.js";
 
+
+
+
+//test
+import ghPages from "gulp-gh-pages";
+gulp.task('deploy', function() {
+    return gulp.src('./dist/**/*')
+        .pipe(ghPages());
+});
+//---
+// import deploy from "gulp-gh-pages";
+// gulp.task('deploy', function() {
+//     return gulp.src('./dist/**/*')
+//         .pipe(deploy({
+//             getRemoteUrl: "https://github.com/Diana-Sh1/Diana-Sh1.github.io.git",
+//             branch: "reserve"
+//             })
+//         );
+// });
+
+
+
 global.app = {
     isBuild: process.argv.includes('--build'),
     isDev: !process.argv.includes('--build'),
