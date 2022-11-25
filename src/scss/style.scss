@@ -773,14 +773,12 @@ main {
   height: 600px;
   @media (max-width: $md3+px) {
     height: 100%;
-    max-height: 600px;
+
   }
   @media (max-width: $md2+px) {
-  max-height: 800px;
-    height: 100%;
-  }
-  @media (min-width: $md1+px) {
-    height: 800px;
+   max-height: 800px;
+    height: 700px;
+    max-width: 100%;
   }
 }
 .main-prev, .main-next {
@@ -792,10 +790,10 @@ main {
 }
 .main-prev:after, .main-next:after {
   color: rgb(0 0 0/ 40%);
-  //border: 1px solid #FFF;
-  //border-radius: 50%;
-  //background-color: rgb(255 255 255/ 40%);
   padding: 20px 30px;
+  @media (max-width: $md2+px) {
+    padding: 0px 0px 0px 0px;
+  }
 }
 
 .header__gallery {
@@ -810,6 +808,9 @@ main {
   //margin-top: 60px;
   margin: 0 auto;
   padding-top: 50px;
+  @media (max-width: $md2+px) {
+    height: 900px;
+  }
 }
 .slide1 {
   position: relative;
@@ -901,7 +902,7 @@ main {
     padding: 0px 20px;
   }
   .main-prev:after, .main-next:after{
-    display: none;
+    font-size: 2em !important;
   }
 
 
@@ -919,6 +920,10 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media (max-width: $md2+px) {
+    max-height: 700px;
+
+  }
 }
 
 .products__title {
@@ -952,6 +957,7 @@ main {
   margin: auto;
   transform: scale(0.95);
   transition: all .5s cubic-bezier(.18, .89, .32, 1.28);
+
 }
 .card__image img:hover {
   transform: scale(1);
@@ -1399,6 +1405,7 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
 
 .caption {
   text-align: center;
+  width: 100%;
 }
 .product_name {
   padding: 0px 0px 10px 0px;
@@ -1455,18 +1462,22 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
     font-size: 1.3em;
   }
 }
+
 .cart{
-  padding: 10px 40px ;
-  border: solid 1px var(--black_color);
   text-transform: uppercase;
   cursor: pointer;
-  & a:hover {
-    color: #FFF;
-  }
+  & a {
+    padding: 10px 40px 10px 40px;
+    text-align: center;
+    border: solid 1px var(--black_color);
   &:hover {
-    background-color: var(--footer_color);
-    color: #FFF;
-    transition: all 0.3s ease-in-out;
+      background-color: var(--footer_color);
+      color: #FFF;
+      transition: all 0.3s ease-in-out;
+  }
+    @media (max-width: $md2+px) {
+      padding: 7px 30px 7px 30px;
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 import * as flsFunctions from "./modules/functions.js";
 flsFunctions.isWebp();
-
+const slide1 = document.querySelector(".slide1");
 const swiperHeader = new Swiper('.header_swiper', {
 
     wrapperClass: "header__wrapper",
@@ -15,6 +15,7 @@ const swiperHeader = new Swiper('.header_swiper', {
     fadeEffect: {
         crossFade: true
     },
+    initialSlide: 1,
     speed: 500,
     nested: true,
     observer: true,
@@ -31,6 +32,7 @@ const carousel_wrapper = new Swiper('.products__wrapper', {
         prevEl: '.carous-next',
     },
     slidesPerGroup: 2,
+
     loop: true,
     loopedSlides: 4,
     speed: 3000,
@@ -66,9 +68,11 @@ let item = document.querySelectorAll('.main-menu a')
 const logo = document.querySelector(".logo");
 const header_menu = document.querySelector(".header__menu");
 const header_nav = document.querySelector(".main-menu");
+const banner_toolbar = document.querySelector(".banner-toolbar");
 function addRemoveActiveClass() {
 
     if (window.pageYOffset >= 170) {
+        header_menu.append(banner_toolbar);
         logo.classList.add("active");
         header_menu.classList.add("active");
         header_nav.classList.add("active");
@@ -706,11 +710,10 @@ function showProducts( products ){
 
         //add the button to the card
         let btn_inner = document.createElement('div');
-        btn_inner.className = 'cart_inner';
+        btn_inner.className = 'cart';
         product_details.appendChild(btn_inner)
 
         let btn = document.createElement('a')
-        btn.className = 'cart'
         btn.textContent = 'Add to Cart';
         btn.setAttribute('data-id', product.id);
         btn.addEventListener('click', addItem);
@@ -728,8 +731,11 @@ function addItem(ev){
 
     let btn_add = document.querySelectorAll('.cart')
     btn_add.forEach((e)=> {
-        e.addEventListener('click',function (){ setTimeout(OpenMenu, 500)})
+
+        // e.addEventListener('click',function (){ setTimeout(OpenMenu, 500)})
+        e.addEventListener('click', OpenMenu)
     function OpenMenu() {
+
             minicart.classList.add("active");
             overlayG.classList.add('active');
             document.body.classList.add("_lock");
