@@ -245,11 +245,6 @@ function appearLeft(entry) {
     entry.forEach(change => {
         if (change.isIntersecting) {
             change.target.classList.add('active');
-            // observer1.unobserve(change.target);
-
-        } else {
-            // change.target.classList.remove('active');
-
         }
     });
 }
@@ -264,16 +259,11 @@ for (let elm of elements1) {
 }
 //
 
-
     function appearRight(entry) {
         entry.forEach(change => {
             if (change.isIntersecting) {
                 change.target.classList.add('active');
-                // observer2.unobserve(change.target);
-            } else {
-                // change.target.classList.remove('active');
             }
-
         });
 
     }
@@ -634,13 +624,13 @@ function decrementCart(ev){
     }
     else{
         console.log('item removed')
-        // document.querySelector('.minicart__body').removeChild(controls.parentElement);
+
     }
 }
 
 function getProducts(success, failure){
     //request the list of products from the "server"
-    const URL = "http://78.107.238.148/products";
+    const URL = "http://192.168.1.40/products";
     fetch(URL, {
         method: 'GET',
         mode: 'cors'
@@ -803,7 +793,7 @@ const product_card = document.querySelector(".item__wrapper");
 if (product_card)
     getProduct();
     async function getProduct() {
-      const response = await fetch('http://78.107.238.148/products')
+      const response = await fetch('http://192.168.1.40/products')
       const productsArray = await response.json();
         renderProducts(productsArray);
     }
@@ -817,7 +807,7 @@ if (product_card)
                           <img src="${item.image[0]}" alt="" class="prod__image">
                         </div>
                         <div class="item__slide swiper-slide">
-                            <img src="${item.image[1]}" alt="">
+                            <img src="${item.image[0]}" alt="">
                         </div>
                     </div>
                     <div class="swiper-pagination"></div>
@@ -911,5 +901,4 @@ if (product_card)
         });
 
     }
-
 

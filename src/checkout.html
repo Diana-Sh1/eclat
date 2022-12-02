@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+@@include('html/head.html', {
+"title":"Eclat de Vie. Checkout"
+})
+<body>
+<div class="wrapper">
+    @@include('html/header.html',{})
+    <main class="checkout">
+        <div class="cart_checkout _container">
+            <div class="cart__wrapper">
+                <div class="page__header heading">
+                    <h1>CART</h1>
+                </div>
+             <div class="cart__content">
+                 <div class="cart__itemlist">
+                     <div class="itemlist__header">
+                         <span class="itemlist__title heading">Product</span>
+                         <span class="itemlist__title heading"></span>
+                         <span class="itemlist__title heading">Quantity</span>
+                         <span class="itemlist__title heading">Total</span>
+                     </div>
+                     <div class="cartItem">
+                         <div class="cartItem__image">
+                             <img src="img/car_6.jpeg" alt="">
+                         </div>
+                         <div class="cartItem__info">
+                            <h2 class="cartItem__title">
+                                <span>Moisturizing Face Mask</span>
+                            </h2>
+                            <div class="cartItem__priceList heading">
+                                <span class="cartItem__price">€101</span>
+                            </div>
+                        </div>
+                        <div class="cartItem__actions">
+                            <div class="cartItem__wrapper">
+                                <div class="cart-item__qty item__quantity-selector heading actions">
+                                    <span class="qty-btn minus-btn" data-action="minus">-</span>
+                                    <span>1</span>
+                                    <span class="qty-btn plus-btn" data-action="plus">+</span>
+
+                                </div>
+<!--                                <a href="#" class="CartItem__Remove Link Link&#45;&#45;underline Link&#45;&#45;underlineShort aca-cco" data-quantity="0" data-line-id="29306785660962:c8c1671573b406a9cca7eedb99613761" data-action="remove-item" aca-line="1" aca-quantity="0" onclick="return false;" data-uw-rm-brl="exc" data-uw-rm-kbnav="click">Remove</a>-->
+                                <span class="close-item delete-btn">remove</span>
+                            </div>
+                        </div>
+                        <div class="cartItem__price heading">
+                            <span>€101</span>
+                        </div>
+                     </div>
+                 </div>
+                 <div class="cart__footer">
+                     <div class="cart__note-container">
+                         <span class="cart__note-text">Is this a gift? Enter a special message for the recipient here.</span>
+                        <textarea class="cart__note-textarea" name="note" rows="4" placeholder="How can we help you?"></textarea>
+                     </div>
+                     <div class="cart__after-check">
+                         <p class="total__heading heading">Total: <span class="heading">€101</span></p>
+                         <p class="cart__taxes">Shipping & taxes calculated at checkout</p>
+                         <p class="cart-link">
+                             <button type="button" class="btn-block checkout-btn">Checkout</button>
+                         </p>
+                     </div>
+                 </div>
+             </div>
+            </div>
+            <div class="section__section">
+                <div class="panel">
+                    <h2 class="panel__title heading">Estimate Shipping</h2>
+                    <div class="panel__content">
+                        <div class="shipping-estimator">
+                            <div class="shipping-estimator__form">
+                                <div class="shipping-estimator__country select">
+                                    <svg class="icon-select-arrow">
+                                    </svg>
+                                    <select class="select_shipping" name="country" id="1" title="Country" aria-label="country">
+                                        <option value="Greece">Greece</option>
+                                        <option value="Russia">Russia</option>
+                                    </select>
+                                </div>
+                                <div class="shipping-estimator__province select">
+                                    <svg class="icon-select-arrow"></svg>
+                                    <select class="select_shipping" name="province" id="2" title="Province" aria-label="province">
+                                        <option value="Athens">Athens</option>
+                                        <option value="Moscow">Moscow</option>
+                                    </select>
+                                </div>
+                                <input type="text" name="zip" class="shipping-estimator_zip" placeholder="Zip code">
+                                <div class="cart-link btn-shipping">
+
+                                        <button type="button" class="btn-block">ESTIMATE</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="recently-viewed">
+            <h2 class="recently-viewed__title heading">Recently Viewed</h2>
+            <section class="products__slider">
+                <div class="products__wrapper swiper">
+                    <div class="product__body swiper-wrapper">
+                        <div class="product__item swiper-slide">
+                            <div class="product__image">
+                                <a href="product_card.html">
+                                    <img src="img/car_1.jpeg"
+                                         onmouseover="this.src='img/car_1_1.jpg';"
+                                         onmouseout="this.src='img/car_1.jpeg'; "
+                                    >
+                                </a>
+                            </div>
+                            <div class="product-details">
+                                <div class="caption">
+                                    <div class="name"><a href="product_card.html">Gel Moussant</a></div>
+                                    <div class="description">Foaming cleansing gel</div>
+                                    <div class="price">
+                                        <span class="price-old"></span>
+                                        <span class="price-new">€14.40</span>
+                                    </div>
+                                    <div class="button-group">
+                                        <div class="cart">
+                                            <a href="">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product__item swiper-slide">
+                            <div class="product__image">
+                                <a href="">
+                                    <img src="img/car_5.jpeg"
+                                         onmouseover="this.src='img/car_5_1.webp';"
+                                         onmouseout="this.src='img/car_5.jpeg'; "
+                                    >
+                                </a>
+                            </div>
+                            <div class="product-details">
+                                <div class="caption">
+                                    <div class="name"><a href="">Deep Cleansing Face Mask</a></div>
+                                    <div class="description">Mask with white clay</div>
+                                    <div class="price">
+                                        <span class="price-old"></span>
+                                        <span class="price-new">€25.60</span>
+                                    </div>
+                                    <div class="button-group">
+                                        <div class="cart">
+                                            <a href="">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product__item swiper-slide">
+                            <div class="product__image">
+                                <a href=""><img src="img/car_3.jpeg" alt=""></a>
+                            </div>
+                            <div class="product-details">
+                                <div class="caption">
+                                    <div class="name"><a href="">face sun screen </a></div>
+                                    <div class="description">Anti-oxidant SPF50+(tinted)</div>
+                                    <div class="price">
+                                        <span class="price-old"></span>
+                                        <span class="price-new">€21.60</span>
+                                    </div>
+                                    <div class="button-group">
+                                        <div class="cart">
+                                            <a href="">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product__item swiper-slide">
+                            <div class="product__image">
+                                <a href="">
+                                    <img src="img/car_2.jpeg"
+                                         onmouseover="this.src='img/car_2_1.jpeg';"
+                                         onmouseout="this.src='img/car_2.jpeg'; "
+                                    >
+                                </a>
+                            </div>
+                            <div class="product-details">
+                                <div class="caption">
+                                    <div class="name"><a href="">BANANA BODY BUTTER</a></div>
+                                    <div class="description">Hydrates the skin</div>
+                                    <div class="price">
+                                        <span class="price-old"></span>
+                                        <span class="price-new">€7.20</span>
+                                    </div>
+                                    <div class="button-group">
+                                        <div class="cart">
+                                            <a href="">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product__item swiper-slide">
+                            <div class="product__image">
+                                <a href="">
+                                    <img src="img/car_4.jpeg"
+                                         onmouseover="this.src='img/car_4_1.jpeg';"
+                                         onmouseout="this.src='img/car_4.jpeg'; "
+                                    >
+                                </a>
+                            </div>
+                            <div class="product-details">
+                                <div class="caption">
+                                    <div class="name"><a href="">EE Color Cream</a></div>
+                                    <div class="description">Antiwrinkle and moisturizing face cream</div>
+                                    <div class="price">
+                                        <span class="price-old"></span>
+                                        <span class="price-new">€30.40</span>
+                                    </div>
+                                    <div class="button-group">
+                                        <div class="cart">
+                                            <a href="">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product__item swiper-slide">
+                            <div class="product__image">
+                                <a href="">
+                                    <img src="img/car_6.jpeg"
+                                         onmouseover="this.src='img/car_6_1.jpeg';"
+                                         onmouseout="this.src='img/car_6.jpeg'; "
+                                    >
+                                </a>
+                            </div>
+                            <div class="product-details">
+                                <div class="caption">
+                                    <div class="name"><a href="">Moisturizing Face Mask</a></div>
+                                    <div class="description">Combination of natural oils</div>
+                                    <div class="price">
+                                        <span class="price-old"></span>
+                                        <span class="price-new">€23.20</span>
+                                    </div>
+                                    <div class="button-group">
+                                        <div class="cart">
+                                            <a href="">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product__item swiper-slide">
+                            <div class="product__image">
+                                <a href="">
+                                    <img src="img/car_7.jpeg"
+                                         onmouseover="this.src='img/car_7_1.jpeg';"
+                                         onmouseout="this.src='img/car_7.jpeg'; "
+                                    >
+                                </a>
+                            </div>
+                            <div class="product-details">
+                                <div class="caption">
+                                    <div class="name"><a href="">Botoxyl Round-the-clock Face Serum</a></div>
+                                    <div class="description">Serum with anti-wrinkle ingredients</div>
+                                    <div class="price">
+                                        <span class="price-old"></span>
+                                        <span class="price-new">€51.20</span>
+                                    </div>
+                                    <div class="button-group">
+                                        <div class="cart">
+                                            <a href="">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-prev carous-prev"></div>
+                    <div class="swiper-button-next carous-next"></div>
+
+                </div>
+
+            </section>
+        </section>
+
+    </main>
+    @@include('html/footer.html',{})
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script src="js/app.min.js"></script>
+
+</body>
+</html>
