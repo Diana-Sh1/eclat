@@ -28,6 +28,37 @@
         </li>
         <li class="toolbar-enter-user">
           <a class="enter-user icon-user_circle" href="#"></a>
+          <ul class="dropdown-menu">
+            <li>
+              <h3 class="nav-title">Already an account?</h3>
+              <hr>
+              <form class="nav-form" action="/login/" method="post">
+                <div class="form-group">
+                  <p>
+                    <input type="text" name="id" placeholder="Username" class="required">
+                  </p>
+                  <p>
+                    <input type="password" name="password" placeholder="Password" class="required">
+                  </p>
+                  <p class="form-infos">
+                    <a href="/">Forgotten your password?</a>
+                  </p>
+                </div>
+                <div class="form-group">
+                  <p class="submit">
+                    <button type="submit" class="btn">Connect</button>
+                  </p>
+                </div>
+              </form>
+              <div class="nav-insc">
+                <p class="nav-insc-title">Don't have any account?</p>
+                <hr>
+                <p class="nav-insc-desc">
+                  <button class="btn cart">Create an Account</button>
+                </p>
+              </div>
+            </li>
+          </ul>
         </li>
         <li class="toolbar-lang">
           <ul class="lang__menu">
@@ -143,8 +174,12 @@
               </ul>
             </div>
           </li>
-          <li class="menu__item"><a href="suncare.html" class="menu__link">Suncare</a></li>
-          <li class="menu__item"><a href="#" class="menu__link icon-shopping-bag">Shopping Cart</a></li>
+          <li class="menu__item">
+            <a href="suncare.html" class="menu__link">Suncare</a>
+          </li>
+          <li class="menu__item">
+            <a href="checkout.html" class="menu__link icon-shopping-bag">Shopping Cart</a>
+          </li>
         </ul>
         <ul class="mobile-menu">
           <li class="container-lang-menu">
@@ -240,12 +275,6 @@
         </ul>
       </div>
     </nav>
-  </div>
-  <div class="searchbar">
-    <form class="searchform" action="/search-results/" method="get">
-      <input class="input-search" type="text" name="q" placeholder="Search">
-      <button class="btn-submit icon-search_new" type="submit"></button>
-    </form>
   </div>
   <div class="gal-video">
     <video preload="auto" autoplay muted loop class="full-screen__video">
@@ -393,7 +422,9 @@
           <div class="col-right"><h3>$50</h3></div>
         </div>
         <div class="cart-link">
-          <button type="button" class="btn-block">Checkout</button>
+          <a href="checkout.html">
+            <button type="button" class="btn-block">Checkout</button>
+          </a>
         </div>
       </div>
     </div>
