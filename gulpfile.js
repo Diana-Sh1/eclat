@@ -14,17 +14,6 @@ gulp.task('deploy', function() {
     return gulp.src('./dist/**/*')
         .pipe(ghPages());
 });
-//---
-// import deploy from "gulp-gh-pages";
-// gulp.task('deploy', function() {
-//     return gulp.src('./dist/**/*')
-//         .pipe(deploy({
-//             getRemoteUrl: "https://github.com/Diana-Sh1/Diana-Sh1.github.io.git",
-//             branch: "reserve"
-//             })
-//         );
-// });
-
 
 
 global.app = {
@@ -39,7 +28,6 @@ global.app = {
 import { copy } from "./gulp/tasks/copy.js";
 import { reset } from "./gulp/tasks/reset.js";
 import { html } from "./gulp/tasks/html.js";
-// import { plugins } from "./gulp/config/plugins.js";
 import { scss } from "./gulp/tasks/scss.js";
 import { js } from "./gulp/tasks/js.js";
 import { images } from "./gulp/tasks/images.js";
@@ -47,6 +35,7 @@ import { oftToTtf, ttfToWoff, fontsStyle } from "./gulp/tasks/fonts.js";
 import { svgSprive } from "./gulp/tasks/svgSprive.js";
 import { zip } from "./gulp/tasks/zip.js";
 import { ftp } from "./gulp/tasks/ftp.js";
+import { json } from "./gulp/tasks/json.js";
 
 //наблюдатель за изменением в файлах
 function watcher() {
@@ -55,6 +44,7 @@ function watcher() {
     gulp.watch(path.watch.scss, scss);
     gulp.watch(path.watch.js, js);
     gulp.watch(path.watch.images, images);
+    gulp.watch(path.watch.images, json);
 }
 
 export { svgSprive }
@@ -63,7 +53,7 @@ export { svgSprive }
 const fonts = gulp.series(oftToTtf, ttfToWoff, fontsStyle);
 
 //основные задачи
-const mainTasks = gulp.series(fonts, gulp.parallel(copy, html, scss, js, images));
+const mainTasks = gulp.series(fonts, gulp.parallel(copy, html, scss, js, images,json));
 
 //построение сценариев выполнения задач
 const dev = gulp.series(reset, mainTasks, watcher);

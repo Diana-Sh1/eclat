@@ -1420,6 +1420,7 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
 
 .description {
   padding: 0px 0px 20px 0px;
+  font-size: 0.8em;
 }
 .price{
   padding: 0px 0px 25px 0px;
@@ -1876,6 +1877,7 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
     transform-origin: left;
   }
 }
+
 .close-item:before {
    //display: inline-block;
     content: "";
@@ -2161,6 +2163,7 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
     transition-timing-function: cubic-bezier(0,0,.2,1);
   }
 }
+
 // dropdown
 .checkout {
   margin-bottom: -200px;
@@ -2174,6 +2177,7 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
   background-color: #C4CED9;
   box-shadow: 1px 1px 1px 2px rgb(86%, 86%, 85%, 0.3);
   color: #FFF;
+  z-index: 999;
   cursor: auto;
   border: solid 1px #C8CED5;
   border-radius: 3px;
@@ -2450,7 +2454,7 @@ hr {
   border: 1px solid #e3e3e3;
 }
 .panel__content {
-
+  width: 100%;
 }
 .panel__title {
   position: absolute;
@@ -2463,39 +2467,14 @@ hr {
   white-space: nowrap;
 
 }
+.shipping-estimator {
+
+}
 .shipping-estimator__form {
   display: flex;
+  width: 100%;
+  justify-content: center;
 }
-.icon-select-arrow{
-  top: calc(50% - 5px);
-  right: 15px;
-  width: 10px;
-  height: 10px;
-  z-index: 1;
-  position: absolute;
-  line-height: normal;
-  pointer-events: none;
-  vertical-align: baseline;
-  display: inline-block;
-  stroke-width: 1px;
-}
-.select {
-  position: relative;
-  vertical-align: middle;
-}
-
-//.shipping-estimator__country {
-//  &:after {
-//    content: "";
-//    position: absolute;
-//    right: 1px;
-//    top: 1px;
-//    height: calc(100% - 2px);
-//    width: 55px;
-//    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, .7) 20%, white 40%);
-//    pointer-events: none;
-//  }
-//}
 .select_shipping {
   width: 100%;
   height: 45px;
@@ -2514,7 +2493,7 @@ hr {
     display: block;
     margin-left: 20px;
     vertical-align: middle;
-    max-width: 300px;
+    max-width: 450px;
     width: 100%;
   }
   .shipping-estimator_zip {
@@ -2540,9 +2519,7 @@ hr {
   .recently-viewed__title {
     text-align: center;
   }
-  .icon-select-arrow {
-    margin-right: 7px;
-  }
+
   .actions span {
     font-style: normal;
   }

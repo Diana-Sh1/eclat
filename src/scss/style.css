@@ -2670,6 +2670,10 @@ hr {
   border: 1px solid #e3e3e3;
 }
 
+.panel__content {
+  width: 100%;
+}
+
 .panel__title {
   position: absolute;
   top: 0;
@@ -2683,25 +2687,8 @@ hr {
 
 .shipping-estimator__form {
   display: flex;
-}
-
-.icon-select-arrow {
-  top: calc(50% - 5px);
-  right: 15px;
-  width: 10px;
-  height: 10px;
-  z-index: 1;
-  position: absolute;
-  line-height: normal;
-  pointer-events: none;
-  vertical-align: baseline;
-  display: inline-block;
-  stroke-width: 1px;
-}
-
-.select {
-  position: relative;
-  vertical-align: middle;
+  width: 100%;
+  justify-content: center;
 }
 
 .select_shipping {
@@ -2722,7 +2709,7 @@ hr {
   display: block;
   margin-left: 20px;
   vertical-align: middle;
-  max-width: 300px;
+  max-width: 450px;
   width: 100%;
 }
 
@@ -2749,10 +2736,6 @@ hr {
 
 .recently-viewed__title {
   text-align: center;
-}
-
-.icon-select-arrow {
-  margin-right: 7px;
 }
 
 .actions span {

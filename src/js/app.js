@@ -1,4 +1,5 @@
 import * as flsFunctions from "./modules/functions.js";
+
 flsFunctions.isWebp();
 const slide1 = document.querySelector(".slide1");
 const swiperHeader = new Swiper('.header_swiper', {
@@ -628,21 +629,27 @@ function decrementCart(ev){
     }
 }
 
-function getProducts(success, failure){
+async function getProducts(){
+    const response = await fetch('js/goods.json')
+    let products = await response.json();
+    showProducts( products )
+    renderProducts(products)
     //request the list of products from the "server"
-    const URL = "http://192.168.1.40/products";
-    fetch(URL, {
-        method: 'GET',
-        mode: 'cors'
-    })
-        .then(response=>response.json())
-        .then(success)
-        .catch(failure);
+    // const URL = "http://192.168.1.40/products";
+    // fetch(URL, {
+    //     method: 'GET',
+    //     mode: 'cors'
+    // })
+    //     .then(response=>response.json())
+    //     .then(success)
+    //     .catch(failure);
+
 }
 
 function showProducts( products ){
     PRODUCTS = products;
      let productSection = document.querySelector('.product-grids');
+
      if(productSection) {
         productSection.innerHTML = "";
         products.forEach(product=>{
@@ -713,31 +720,34 @@ function showProducts( products ){
     })
 }}
 
+
 function addItem(ev){
     ev.preventDefault();
     let id = parseInt(ev.target.getAttribute('data-id'));
 
     CART.add(id, 1);
 
-    let btn_add = document.querySelectorAll('.cart')
-    btn_add.forEach((e)=> {
+    //добавление в миникарту из списка товаров
+    // let btn_add = document.querySelectorAll('.cart')
+    //
+    // btn_add.forEach((e)=> {
+    //     // e.addEventListener('click',function (){ setTimeout(OpenMenu, 500)})
+    //     e.addEventListener('click', OpenMenu)
+    //
+    // })
 
-        // e.addEventListener('click',function (){ setTimeout(OpenMenu, 500)})
-        e.addEventListener('click', OpenMenu)
-    function OpenMenu() {
-
-            minicart.classList.add("active");
-            overlayG.classList.add('active');
-            document.body.classList.add("_lock");
-
-        };
-
-    })
+    //добавление в миникарту из карточки товара
+    OpenMenu();
     toggleCartStatus();
     showCart();
 
 }
+function OpenMenu() {
+    minicart.classList.add("active");
+    overlayG.classList.add('active');
+    document.body.classList.add("_lock");
 
+};
 function errorMessage(err){
     //display the error message to the user
     console.error(err);
@@ -790,47 +800,48 @@ function deleteFromLS () {
 
 //карточка товара
 const product_card = document.querySelector(".item__wrapper");
-if (product_card)
-    getProduct();
-    async function getProduct() {
-      const response = await fetch('http://192.168.1.40/products')
-      const productsArray = await response.json();
-        renderProducts(productsArray);
-    }
-    function renderProducts(productsArray) {
-        productsArray.forEach(function (item){
+
+    // getProduct();
+    // async function getProduct() {
+    //   const response = await fetch('js/goods.json')
+    //   const productsArray = await response.json();
+    //     renderProducts(productsArray);
+    // }
+    function renderProducts(products) {
+        PRODUCTS = products;
+        products.forEach(function (product) {
             let productHTML = `
              <div class="item__info">
                 <div class="item__gallery-wrapper swiper">
                     <div class="slider__body swiper-wrapper">
                         <div class="item__slide swiper-slide">
-                          <img src="${item.image[0]}" alt="" class="prod__image">
+                          <img src="${product.image[0]}" alt="" class="prod__image">
                         </div>
                         <div class="item__slide swiper-slide">
-                            <img src="${item.image[0]}" alt="">
+                            <img src="${product.image[1]}" alt="">
                         </div>
                     </div>
                     <div class="swiper-pagination"></div>
                     </div>
                 <div class="item__infoWrapper">
-                    <div class="item__title">${item.name}</div>
+                    <div class="item__title">${product.name}</div>
                     <div class="item__label">
-                        <p>Product code: <span class="card_id">${item.id}</span></p>
-                        <p>Availability: <span>In stock ${item.stock}</span></p>
+                        <p>Product code: <span class="card_id">${product.id}</span></p>
+                        <p>Availability: <span>In stock ${product.stock}</span></p>
                     </div>
-                    <div class="item__price">${item.price}</div>
+                    <div class="item__price">${product.price}</div>
                     <div class="item__buttons">
 
                         <div class="quantity_addtoCart">
  <!--             // счетчик -->
                             <div class="item__quantity-selector">
-                                <span class="quantitySelector__btn" data-action="minus">-</span>
+                                <span class="quantitySelector__btn" data-id="${product.id}" data-action="minus">-</span>
                                 <span class="item__current-quantity" data-counter>1</span>
-                                <span class="quantitySelector__btn" data-action="plus">+</span>
+                                <span class="quantitySelector__btn" data-id="${product.id}" data-action="plus">+</span>
                             </div>
 <!--             // счетчик -->
                             <div class="item__addtocart" >
-                                <button data-cart type="submit" class="addToCart__btn">Add to Cart</button>
+                                <button data-cart type="submit" class="addToCart__btn" data-id="${product.id}" data-cart>Add to Cart</button>
                             </div>
                         </div>
                         <div class="item__wishlist">
@@ -838,11 +849,10 @@ if (product_card)
                         </div>
                     </div>
                     <div class="item__description">
-                    ${item.description}
-<!--                        A daily moisturiser that gently resurfaces the skin to reveal a stunningly smooth complexion whilst providing SPF 30 protection.-->
+                    ${product.description}
                     </div>
                     <div class="item__volume">
-                       Vol.: <span>${item.volume}</span>
+                       Vol.: <span>${product.volume}</span>
                     </div>
                 </div>
             </div>
@@ -858,47 +868,84 @@ if (product_card)
             </div>`;
             // product_card.insertAdjacentHTML('beforeend', productHTML);
             product_card.innerHTML = productHTML;
+
+            let btn__itemCounter = document.querySelectorAll('.quantitySelector__btn')
+            let counter;
+            if (btn__itemCounter) {
+                btn__itemCounter.forEach(e => {
+                    e.addEventListener('click', (event) => {
+                        const counterWrapper = event.target.closest(".item__quantity-selector")
+                        counter = counterWrapper.querySelector('[data-counter]')
+                        if (event.target.dataset.action === 'minus') {
+                            if (parseInt(counter.innerText) > 1) {
+                                counter.innerText = --counter.innerText;
+                            }
+                        }
+                        if (event.target.dataset.action === 'plus') {
+                            counter.innerText = ++counter.innerText;
+                        }
+                    })
+                })
+            }
+
+
             //swiper
-        const product_swiper = new Swiper ('.item__gallery-wrapper', {
-            wrapperClass: "slider__body",
-            slideClass: "item__slide",
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-                dynamicBullets: true,
-            },
-            effect: 'fade',
-            fadeEffect: {
-                crossFade: true
-            },
-            loop: true,
-            speed: 500,
-            nested: true,
-            observer: true,
-            observeParents: true,
-            observeSlideChildren: true,
-            watchSlidesVisibility: true,
-            watchSlidesProgress: true,
+            const product_swiper = new Swiper('.item__gallery-wrapper', {
+                wrapperClass: "slider__body",
+                slideClass: "item__slide",
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                    dynamicBullets: true,
+                },
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
+                },
+                loop: true,
+                speed: 500,
+                nested: true,
+                observer: true,
+                observeParents: true,
+                observeSlideChildren: true,
+                watchSlidesVisibility: true,
+                watchSlidesProgress: true,
+
+            });
+            //табы продуктов
+            const allTabs = document.querySelector(".tabs__items");
+            document.querySelectorAll(".tabs__item").forEach((item) =>
+                item.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const id = e.target.getAttribute('href').replace('#', '')
+                    document.querySelectorAll(".tabs__item").forEach(
+                        (child) => child.classList.remove('tabs__item--active'));
+                    document.querySelectorAll(".tabs__block").forEach(
+                        (child) => child.classList.remove('tabs__block--active'));
+                    item.classList.add('tabs__item--active');
+                    document.getElementById(id).classList.add('tabs__block--active')
+
+                }));
+            if (allTabs)
+                allTabs.querySelector('.tabs__item').click();
 
         });
-        //табы продуктов
-        const allTabs = document.querySelector(".tabs__items");
-        document.querySelectorAll(".tabs__item").forEach((item) =>
-            item.addEventListener('click', function (e){
-                e.preventDefault();
-                const id = e.target.getAttribute('href').replace('#', '')
-                document.querySelectorAll(".tabs__item").forEach(
-                    (child) => child.classList.remove('tabs__item--active'));
-                document.querySelectorAll(".tabs__block").forEach(
-                    (child) => child.classList.remove('tabs__block--active'));
-                item.classList.add('tabs__item--active');
-                document.getElementById(id).classList.add('tabs__block--active')
 
-            }));
-        if (allTabs)
-            allTabs.querySelector('.tabs__item').click();
+        // window.addEventListener('click', function (e) {
+        //     if (e.target.hasAttribute('data-cart')) {
+        //
+        //     }
+        // })
+        let btn__itemAdd = document.querySelector('.addToCart__btn')
+        btn__itemAdd.addEventListener('click', addItem)
 
-        });
 
     }
 
+
+    //focus на инпуте в окне логина
+    const inputLogin = document.querySelector('.required')
+    const iconLogin = document.querySelector('.toolbar-enter-user');
+    iconLogin.addEventListener('mouseover', ()=> {
+        inputLogin.focus();
+    })

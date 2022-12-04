@@ -15,6 +15,7 @@ export const path = {
     },
     src: {
         js: `${srcFolder}/js/app.js`,
+        json: `${srcFolder}/js/*.json`,
         images: `${srcFolder}/img/**/*.{jpg,jpeg,gif,webp,mp4,png,ico}`,
         svg: `${srcFolder}/img/**/*.svg`,
         scss: `${srcFolder}/scss/style.scss`,
@@ -24,6 +25,7 @@ export const path = {
     },
     watch: {
         js: `${srcFolder}/js/**/*.js`,
+        json: `${srcFolder}/js/*.json`,
         scss: `${srcFolder}/scss/**/*.scss`,
         html: `${srcFolder}/**/*.html`,
         images: `${srcFolder}/img/**/*.{jpg,jpeg,png,svg,gif,ico,webp,mp4}`,
