@@ -736,9 +736,15 @@ function addItem(ev){
     //
     // })
 
-    //добавление в миникарту из карточки товара
+    //добавление товара из карточки товара
+    addToCartFromItem (ev);
+    //сбрасываем счетчик в карточке товара на 1 после добавления
+    document.querySelector('[data-counter]').innerText = '1';
+    //открытие миникорзины
     OpenMenu();
+    //плашка корзина пуста
     toggleCartStatus();
+    //отображение мини-корзины
     showCart();
 
 }
@@ -755,7 +761,7 @@ function errorMessage(err){
 
 //плашка с суммой товаров на иконке корзины
 
-    function addtoIcon() {
+function addtoIcon() {
         let bag_sum = document.querySelector(".bag_sum");
         if(bag_sum) {
         let sum = 0;
@@ -788,11 +794,14 @@ function toggleCartStatus(){
 }
 
 //удаление товара из ЛС
-function deleteFromLS () {
-    let items = CART.contents
-    items.forEach(function (item,index){
-            items.splice(index,1);
-    });
+function deleteFromLS (ev) {
+    let items = CART.contents;
+    let idItem = parseInt(ev.target.getAttribute('data-id'));
+    const index = items.findIndex(n => n.id === idItem);
+    if (index !== -1) {
+        items.splice(index, 1);
+    }
+
     CART.sync();
     showCart();
     addtoIcon();
@@ -800,7 +809,7 @@ function deleteFromLS () {
 
 //карточка товара
 const product_card = document.querySelector(".item__wrapper");
-
+let counter_product;
     // getProduct();
     // async function getProduct() {
     //   const response = await fetch('js/goods.json')
@@ -831,7 +840,6 @@ const product_card = document.querySelector(".item__wrapper");
                     </div>
                     <div class="item__price">${product.price}</div>
                     <div class="item__buttons">
-
                         <div class="quantity_addtoCart">
  <!--             // счетчик -->
                             <div class="item__quantity-selector">
@@ -862,13 +870,14 @@ const product_card = document.querySelector(".item__wrapper");
                     <a href="#tab_02" class="tabs__item">Ingredients</a>
                 </nav>
                 <div class="tabs__body">
-                    <div id="tab_01" class="tabs__block">${item.description}</div>
+                    <div id="tab_01" class="tabs__block">${product.description}</div>
                     <div id="tab_02" class="tabs__block">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex magnam mollitia nulla odit placeat veniam.</div>
                 </div>
             </div>`;
-            // product_card.insertAdjacentHTML('beforeend', productHTML);
-            product_card.innerHTML = productHTML;
 
+
+            product_card.innerHTML = productHTML;
+//счетчик в карточке товара
             let btn__itemCounter = document.querySelectorAll('.quantitySelector__btn')
             let counter;
             if (btn__itemCounter) {
@@ -887,6 +896,8 @@ const product_card = document.querySelector(".item__wrapper");
                     })
                 })
             }
+
+//добавление товара из карточки товара
 
 
             //swiper
@@ -931,17 +942,18 @@ const product_card = document.querySelector(".item__wrapper");
 
         });
 
-        // window.addEventListener('click', function (e) {
-        //     if (e.target.hasAttribute('data-cart')) {
-        //
-        //     }
-        // })
         let btn__itemAdd = document.querySelector('.addToCart__btn')
         btn__itemAdd.addEventListener('click', addItem)
 
 
-    }
 
+    }
+function addToCartFromItem (ev) {
+    counter_product = document.querySelector('[data-counter]').innerText;
+    let id = parseInt(ev.target.getAttribute('data-id'));
+    CART.add(id, parseInt(counter_product));
+
+}
 
     //focus на инпуте в окне логина
     const inputLogin = document.querySelector('.required')
