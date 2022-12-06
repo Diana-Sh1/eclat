@@ -1,0 +1,74 @@
+[
+  {
+    "id": 123,
+    "name": "Gel Moussant",
+    "description": "Foaming cleansing gel for all skin types, except very dry skins.",
+    "image": [
+      "img/car_1.jpeg",
+      "img/car_1_1.jpg"
+    ],
+    "volume": "200ml",
+    "price": 14,
+    "stock": 5
+  },
+  {
+    "id": 124,
+    "name": "Banana Body Butter",
+    "description": "Body butter with a rich texture and delicious aroma of sweet banana that lasts all day.",
+    "image": [
+      "img/car_2.jpeg",
+      "img/car_2_1.jpeg"
+    ],
+    "volume": "200ml",
+    "price": 7,
+    "stock": 3
+  },
+  {
+    "id": 125,
+    "name": "EE Color Cream",
+    "description": "Tinted face cream with specialized antiwrinkle and moisturizing action.",
+    "image": [
+      "img/car_4.jpeg",
+      "img/car_4_1.jpeg"
+    ],
+    "volume": "50ml",
+    "price": 30,
+    "stock": 4
+  },
+  {
+    "id": 126,
+    "name": "Moisturizing Face Mask",
+    "description": "Helps retain moisture and regenerate the skin mesh so that the skin looks noticeably smoother and more elastic.",
+    "image": [
+      "img/car_6.jpeg",
+      "img/car_6_1.jpeg"
+    ],
+    "volume": "60ml",
+    "price": 23,
+    "stock": 10
+  },
+  {
+    "id": 127,
+    "name": "Botoxyl Eye Tight Cream",
+    "description": "Intensive care eye cream with active ingredients that immediately reduce the appearance of skin imperfections, help to straighten the eyelid while reducing dark circles and puffiness under the eyes.",
+    "image": [
+      "img/car_7.jpeg",
+      "img/car_7_1.jpeg"
+      ],
+    "volume": "30ml",
+    "price": 46,
+    "stock": 3
+  },
+  {
+    "id": 128,
+    "name": "Deep Clean Mask",
+    "description": "Sunscreen face cream of very high protection with photostable filters, in natural subtle tint, suitable for every skin type.",
+    "image": [
+      "img/car_5.jpeg",
+      "img/car_5_1.webp"
+    ],
+    "volume": "70ml",
+    "price": 31,
+    "stock": 15
+  }
+]

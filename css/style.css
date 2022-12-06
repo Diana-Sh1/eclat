@@ -1579,6 +1579,7 @@ input[type=text], input[type=email], input[type=password], input[type=tel], text
 
 .description {
   padding: 0px 0px 20px 0px;
+  font-size: 0.8em;
 }
 
 .price {
@@ -2328,7 +2329,7 @@ input[type=text], input[type=email], input[type=password], input[type=tel], text
   opacity: 0;
   transition-property: opacity, transform, visibility;
   transform: translate3d(0, 100%, 0);
-  transition-duration: 1s;
+  transition-duration: 0.5s;
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 }
 .alert_empty.active {
@@ -2336,7 +2337,7 @@ input[type=text], input[type=email], input[type=password], input[type=tel], text
   visibility: visible;
   opacity: 1;
   transform: translateZ(0);
-  transition-duration: 1s;
+  transition-duration: 0.5s;
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
@@ -2371,6 +2372,7 @@ input[type=text], input[type=email], input[type=password], input[type=tel], text
   background-color: #C4CED9;
   box-shadow: 1px 1px 1px 2px rgba(219, 219, 217, 0.3);
   color: #FFF;
+  z-index: 999;
   cursor: auto;
   border: solid 1px #C8CED5;
   border-radius: 3px;
@@ -2670,6 +2672,10 @@ hr {
   border: 1px solid #e3e3e3;
 }
 
+.panel__content {
+  width: 100%;
+}
+
 .panel__title {
   position: absolute;
   top: 0;
@@ -2683,25 +2689,8 @@ hr {
 
 .shipping-estimator__form {
   display: flex;
-}
-
-.icon-select-arrow {
-  top: calc(50% - 5px);
-  right: 15px;
-  width: 10px;
-  height: 10px;
-  z-index: 1;
-  position: absolute;
-  line-height: normal;
-  pointer-events: none;
-  vertical-align: baseline;
-  display: inline-block;
-  stroke-width: 1px;
-}
-
-.select {
-  position: relative;
-  vertical-align: middle;
+  width: 100%;
+  justify-content: center;
 }
 
 .select_shipping {
@@ -2722,7 +2711,7 @@ hr {
   display: block;
   margin-left: 20px;
   vertical-align: middle;
-  max-width: 300px;
+  max-width: 450px;
   width: 100%;
 }
 
@@ -2749,10 +2738,6 @@ hr {
 
 .recently-viewed__title {
   text-align: center;
-}
-
-.icon-select-arrow {
-  margin-right: 7px;
 }
 
 .actions span {
