@@ -719,14 +719,17 @@ function showProducts( products ){
         //add the card to the section
         productSection.appendChild(card);
     })
-}}
+}
+}
 
 //добавление товара в корзину из карусели
-let cart_carousel = document.querySelector('.cart')
-cart_carousel.addEventListener('click', function (ev){
-    ev.preventDefault();
-    addItem();
+let cart_carousel = document.querySelectorAll('.cart')
+cart_carousel.forEach(function (cart){
+    cart.addEventListener('click', function (ev){
+        addItem();
+    })
 })
+
 function addItem(ev){
     ev.preventDefault();
     let id = parseInt(ev.target.getAttribute('data-id'));
