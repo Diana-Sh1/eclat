@@ -611,7 +611,7 @@ function incrementCart(ev){
         qty.textContent = item.qty;
     }
 }
-
+//test
 function decrementCart(ev){
     ev.preventDefault();
     let id = parseInt(ev.target.getAttribute('data-id'));
@@ -633,6 +633,7 @@ async function getProducts(){
     const response = await fetch('js/goods.json')
     let products = await response.json();
     showProducts( products )
+
     renderProducts(products)
     //request the list of products from the "server"
     // const URL = "http://192.168.1.40/products";
@@ -720,7 +721,12 @@ function showProducts( products ){
     })
 }}
 
-
+//добавление товара в корзину из карусели
+let cart_carousel = document.querySelector('.cart')
+cart_carousel.addEventListener('click', function (ev){
+    ev.preventDefault();
+    addItem();
+})
 function addItem(ev){
     ev.preventDefault();
     let id = parseInt(ev.target.getAttribute('data-id'));
@@ -739,7 +745,7 @@ function addItem(ev){
     //добавление товара из карточки товара
     addToCartFromItem (ev);
     //сбрасываем счетчик в карточке товара на 1 после добавления
-    document.querySelector('[data-counter]').innerText = '1';
+    if(product_card) document.querySelector('[data-counter]').innerText = '1';
     //открытие миникорзины
     OpenMenu();
     //плашка корзина пуста
@@ -810,6 +816,7 @@ function deleteFromLS (ev) {
 //карточка товара
 const product_card = document.querySelector(".item__wrapper");
 let counter_product;
+
     // getProduct();
     // async function getProduct() {
     //   const response = await fetch('js/goods.json')
@@ -817,6 +824,7 @@ let counter_product;
     //     renderProducts(productsArray);
     // }
     function renderProducts(products) {
+        if(product_card) {
         PRODUCTS = products;
         products.forEach(function (product) {
             let productHTML = `
@@ -946,15 +954,16 @@ let counter_product;
         btn__itemAdd.addEventListener('click', addItem)
 
 
+    }
+}
+function addToCartFromItem (ev) {
+    if (product_card) {
+        counter_product = document.querySelector('[data-counter]').innerText;
+        let id = parseInt(ev.target.getAttribute('data-id'));
+        CART.add(id, parseInt(counter_product));
 
     }
-function addToCartFromItem (ev) {
-    counter_product = document.querySelector('[data-counter]').innerText;
-    let id = parseInt(ev.target.getAttribute('data-id'));
-    CART.add(id, parseInt(counter_product));
-
 }
-
     //focus на инпуте в окне логина
     const inputLogin = document.querySelector('.required')
     const iconLogin = document.querySelector('.toolbar-enter-user');

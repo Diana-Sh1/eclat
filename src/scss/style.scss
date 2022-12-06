@@ -2134,7 +2134,7 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
   opacity: 0;
   transition-property: opacity,transform,visibility;
   transform: translate3d(0,100%,0);
-  transition-duration: 1s;
+  transition-duration: 0.5s;
   transition-timing-function: cubic-bezier(.4,0,1,1);
   &.active {
 
@@ -2142,7 +2142,7 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
      visibility: visible;
     opacity: 1;
     transform: translateZ(0);
-    transition-duration: 1s;
+    transition-duration: 0.5s;
     transition-timing-function: cubic-bezier(0,0,.2,1);
   }
 }
