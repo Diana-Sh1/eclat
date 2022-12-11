@@ -730,6 +730,7 @@ cart_carousel.forEach(function (cart){
     })
 })
 
+
 function addItem(ev){
     ev.preventDefault();
     let id = parseInt(ev.target.getAttribute('data-id'));
@@ -757,6 +758,7 @@ function addItem(ev){
     showCart();
 
 }
+//открытие мини-корзины
 function OpenMenu() {
     minicart.classList.add("active");
     overlayG.classList.add('active');
