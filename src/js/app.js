@@ -530,9 +530,11 @@ function showCart(){
         cart_details.className = 'cart-item__details';
         cartitem_wrapper.appendChild(cart_details);
 
-        let title = document.createElement('div');
+        let title = document.createElement('a');
+        // let title = document.createElement('div');
         title.textContent = item.title;
         title.className = 'cart-item__name'
+        title.setAttribute("href", "product_card.html")
         cart_details.appendChild(title);
 
 
