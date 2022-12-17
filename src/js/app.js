@@ -849,6 +849,7 @@ let counter_product;
                     </div>
                 <div class="item__infoWrapper">
                     <div class="item__title">${product.name}</div>
+                    <div class="item__price-mini">${product.price}</div>
                     <div class="item__label">
                         <p>Product code: <span class="card_id">${product.id}</span></p>
                         <p>Availability: <span>In stock ${product.stock}</span></p>

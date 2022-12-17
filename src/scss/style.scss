@@ -1581,10 +1581,20 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
 .item__wrapper {
   margin-top: 250px;
   margin-bottom: 50px;
+  @media (max-width: $md3+px) {
+    padding: 0 100px;
+  }
+  @media (max-width: $md4+px) {
+    padding: 0 30px;
+  }
 }
 .item__info {
   display: flex;
   margin-bottom: 30px;
+  @media (max-width: $md3+px) {
+    flex-direction: column;
+  }
+
 }
 
 //swiper item
@@ -1623,7 +1633,10 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
   padding: 0px 0px 50px 0px;
   text-transform: uppercase;
   color: var(--black_color);
-
+  @media (max-width: $md3+px) {
+    padding: 30px 0 20px 0;
+    font-size: 1.7em;
+  }
 }
 .item__label {
   width: 100%;
@@ -1642,6 +1655,23 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
 &:before {
   content: "€";
 }
+  @media (max-width: $md3+px) {
+
+    display: none;
+  }
+}
+.item__price-mini {
+  display: none;
+  font-size: 1.5em;
+  margin: 0px 0px 30px 0px;
+  text-align: center;
+  &:before {
+    content: "€";
+  }
+  @media (max-width: $md3+px) {
+    display: block;
+
+  }
 }
 .item__buttons {
   display: flex;
@@ -1743,7 +1773,10 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
   margin-bottom: 20px;
   display: flex;
   padding: 0px 100px 0px 100px;
-
+  @media (max-width: $md3+px) {
+    padding: 0;
+    justify-content: space-around;
+  }
 }
 .tabs__item {
   font-size: 1.2em;
