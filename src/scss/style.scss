@@ -1909,6 +1909,10 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
     transition: transform 0.25s;
     transform-origin: left;
   }
+  @media (max-width: $md3+px) {
+    float: left;
+    padding-top: 20px;
+  }
 }
 
 .close-item:before {
@@ -1978,7 +1982,6 @@ input[type='text'], input[type='email'], input[type='password'], input[type='tel
 }
 .cart-item__qty {
   height: auto;
-
   display: flex;
   width: 50%;
   border: none;
@@ -2317,6 +2320,12 @@ hr {
 }
 .cart__wrapper {
   margin-top: 150px;
+  @media (max-width: $md3+px) {
+    padding: 0 40px;
+  }
+  @media (max-width: $md4+px) {
+    padding: 0 10px;
+  }
 }
 .page__header {
   margin: 50px 0;
@@ -2350,12 +2359,16 @@ hr {
   border-bottom: 1px solid #e3e3e3;
   text-align: center;
   font-weight: 400 !important;
+  @media (max-width: $md3+px) {
+    display: none;
+  }
 }
 .cartItem {
   display: table-row;
   table-layout: fixed;
   margin: 30px 0;
   width: 100%;
+
 }
 .cartItem__image {
   width: 120px;
@@ -2378,6 +2391,9 @@ hr {
     width: 100%;
     object-fit: contain;
   }
+  @media (max-width: $md3+px) {
+
+  }
 }
 .cartItem__info {
   max-width: 425px;
@@ -2393,9 +2409,7 @@ hr {
 .cartItem__priceList {
   margin-bottom: 20px;
 }
-.cartItem__price {
-  display: inline-block;
-}
+
 
 .cartItem__actions {
   display: table-cell;
@@ -2408,21 +2422,33 @@ hr {
   //display: table-cell;
   vertical-align: middle;
   align-items: center;
+  @media (max-width: $md3+px) {
+    padding-left: 25px;
+  }
 }
-.delete-btn {
 
-}
 .actions {
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid #e3e3e3;
-  padding: 10px 5px;
+  padding: 10px 60px;
   width: 40%;
   margin: 0 auto;
+  @media (max-width: $md3+px) {
+    margin: 0;
+    padding: 10px 30px;
+  }
 }
 .itemlist__title:last-child {
   text-align: right;
+}
+.actions__wrapper {
+  display: table-row;
+  @media (max-width: $md3+px){
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .cartItem__price {
@@ -2432,6 +2458,9 @@ hr {
   & span {
     display: inline-block;
   }
+  @media (max-width: $md3+px) {
+    display: none;
+  }
 }
 .cart__footer {
   display: table;
@@ -2439,10 +2468,17 @@ hr {
   table-layout: fixed;
   padding-top: 25px;
   border-top: 1px solid #e3e3e3;
+  @media (max-width: $md3+px) {
+    display: flex;
+    flex-direction: column;
+  }
 }
 .cart__note-container {
   width: 340px;
   display: table-cell;
+  @media (max-width: $md3+px) {
+    width: 100%;
+  }
 }
 .cart__note-text {
   text-transform: none;
@@ -2465,6 +2501,7 @@ hr {
   display: table-cell;
   margin-top: 16px;
   text-align: right;
+
 }
 .cart__taxes, .total__heading {
   margin-bottom: 8px;
@@ -2477,6 +2514,12 @@ hr {
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: $md3+px) {
+    margin: auto;
+  }
+  @media (max-width: $md4+px) {
+    width: 100%;
+  }
 }
 .section__section {
   margin: 145px 0;
@@ -2507,6 +2550,9 @@ hr {
   display: flex;
   width: 100%;
   justify-content: center;
+  @media (max-width: $md4+px) {
+    flex-direction: column;
+  }
 }
 .select_shipping {
   width: 100%;
@@ -2528,6 +2574,9 @@ hr {
     vertical-align: middle;
     max-width: 450px;
     width: 100%;
+    @media (max-width: $md4+px) {
+      margin: 0;
+    }
   }
   .shipping-estimator_zip {
     margin-left: 20px;
@@ -2537,13 +2586,20 @@ hr {
     border-radius: 0;
     border: 1px solid #e3e3e3;
     width: 100%;
-    line-height: normal;
     resize: none;
     transition: border-color .1s ease-in-out;
     background: transparent;
+    @media (max-width: $md4+px) {
+      margin: 0;
+      max-width: 100%;
+      padding: 11px 10px !important;
+    }
   }
   .btn-shipping {
     margin: 0 0 0 20px;
+    @media (max-width: $md4+px) {
+      margin: 15px 0 0 0;
+    }
 
   }
   .recently-viewed {
